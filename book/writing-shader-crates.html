@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="attributes.html"><strong aria-hidden="true">2.</strong> Attribute syntax</a></li><li class="chapter-item expanded "><a href="building-rust-gpu.html"><strong aria-hidden="true">3.</strong> Building Rust-GPU</a></li><li class="chapter-item expanded "><a href="platform-support.html"><strong aria-hidden="true">4.</strong> Platform Support</a></li><li class="chapter-item expanded "><a href="writing-shader-crates.html" class="active"><strong aria-hidden="true">5.</strong> Writing Shader Crates</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> RFCs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rfcs/001-resource-binding-syntax.html"><strong aria-hidden="true">6.1.</strong> Resource Binding Syntax</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Contributing to Rust-GPU</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="building-rust-gpu.html"><strong aria-hidden="true">2.1.</strong> Building</a></li><li class="chapter-item expanded "><a href="testing.html"><strong aria-hidden="true">2.2.</strong> Testing</a></li><li class="chapter-item expanded "><a href="spirv-minimization.html"><strong aria-hidden="true">2.3.</strong> Minimizing bugs in SPIR-V</a></li></ol></li><li class="chapter-item expanded "><a href="platform-support.html"><strong aria-hidden="true">3.</strong> Platform Support</a></li><li class="chapter-item expanded "><a href="writing-shader-crates.html" class="active"><strong aria-hidden="true">4.</strong> Writing Shader Crates</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Features</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="attributes.html"><strong aria-hidden="true">5.1.</strong> Attribute syntax</a></li><li class="chapter-item expanded "><a href="inline-asm.html"><strong aria-hidden="true">5.2.</strong> Inline Assembly</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> RFCs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rfcs/001-resource-binding-syntax.html"><strong aria-hidden="true">6.1.</strong> Resource Binding Syntax</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,13 +136,15 @@
                         </a>
                         
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -163,14 +165,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#writing-shader-crates" id="writing-shader-crates">Writing Shader Crates</a></h1>
+                        <h1 id="writing-shader-crates"><a class="header" href="#writing-shader-crates">Writing Shader Crates</a></h1>
 <p>This is section is going to walk you through writing a shader in Rust and
 setting up your shader crate.</p>
 <p>Be aware that this project is in a very early phase, please <a href="https://github.com/EmbarkStudios/rust-gpu/issues">file an
 issue</a> if there's something
 not working or unclear.</p>
-<h2><a class="header" href="#setup" id="setup">Setup</a></h2>
-<p>There are two main ways to setup your shader project.</p>
+<h2 id="online"><a class="header" href="#online">Online</a></h2>
+<p>You can now test out and try building shaders with rust-gpu from the browser!</p>
+<ul>
+<li><a href="https://shadered.org/template">SHADERed</a> A shader IDE which has a lite version, which allows you to build
+and run shaders on the web.</li>
+<li><a href="http://shader-playground.timjones.io/9d744d5893beb6a8f129fda50ad4aeeb">Shader Playground</a> A playground for building and checking the output of
+shader code similar to godbolt or play.rust-lang.org.</li>
+</ul>
+<h2 id="local-setup"><a class="header" href="#local-setup">Local Setup</a></h2>
+<p>There are two main ways to setup your shader project locally.</p>
 <ol>
 <li>Using the <code>spirv-builder</code> crate.
 The <code>spirv-builder</code> is a crate designed to automate the process of building
@@ -181,51 +191,63 @@ Alternatively if you're willing to do the setup yourself you can manually set
 flags in your cargo configuration to enable you to run <code>cargo build</code> in your
 shader crate.</li>
 </ol>
-<h3><a class="header" href="#using-spirv-builder" id="using-spirv-builder">Using <code>spirv-builder</code></a></h3>
+<h3 id="using-spirv-builder"><a class="header" href="#using-spirv-builder">Using <code>spirv-builder</code></a></h3>
 <p>If you're writing a bigger application and you want to integrate SPIR-V shader
 crates to display, it's recommended to use <code>spirv-builder</code> in a build script.</p>
-<h4><a class="header" href="#buildrs" id="buildrs"><code>build.rs</code></a></h4>
+<ol>
+<li>Copy the <a href="https://github.com/EmbarkStudios/rust-gpu/blob/main/rust-toolchain"><code>rust-toolchain</code></a> file to your project. (You must use the same version of Rust as <code>rust-gpu</code>.)</li>
+<li>Create a <code>build.rs</code> in your project root.</li>
+</ol>
+<h4 id="buildrs"><a class="header" href="#buildrs"><code>build.rs</code></a></h4>
+<p>Paste the following into the <code>main</code> for your build script.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>SpirvBuilder::new(path_to_shader)
         .spirv_version(1, 0)
-        .print_metadata()
+        .print_metadata(MetadataPrintout::Full)
         .build()?;
 <span class="boring">}
 </span></code></pre></pre>
-<h4><a class="header" href="#mainrs" id="mainrs"><code>main.rs</code></a></h4>
+<h4 id="mainrs"><a class="header" href="#mainrs"><code>main.rs</code></a></h4>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const SHADER: &amp;[u8] = include_bytes!(env!(&quot;&lt;shader_name&gt;.spv&quot;));
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#using-cargoconfig" id="using-cargoconfig">Using <code>.cargo/config</code></a></h3>
-<p>If you just want to compile a build a shader crate, and don't need to
+<h3 id="using-cargoconfig"><a class="header" href="#using-cargoconfig">Using <code>.cargo/config</code></a></h3>
+<blockquote>
+<p><strong>Note</strong> This method will require manually rebuilding <code>rust-gpu</code> each
+time there has been changes to the repository.</p>
+</blockquote>
+<p>If you just want to build a shader crate, and don't need to
 automatically compile the SPIR-V binary at build time, you can use
 <code>.cargo/config</code> to set the necessary flags. Before you can do that however you
 need to do a couple of steps first to build the compiler backend.</p>
 <ol>
 <li>Clone the <code>rust-gpu</code> repository</li>
-<li><code>cargo build --release</code></li>
+<li><code>cargo build --release</code> in <code>rust-gpu</code>.</li>
 </ol>
 <p>Now you should have a <code>librustc_codegen_spirv</code> dynamic library available in
 <code>target/release</code>. You'll need to keep this somewhere stable that you can
 reference from your shader project.</p>
-<p>Now we need to add our <code>.cargo/config</code> file. This tells cargo to build for the
-<code>spirv-unknown-unknown</code> target, and provides a path to the codegen backend for
-that target. We have to also provide <code>-Zbuild-std</code> as the
-<code>spirv-unknown-unknown</code> sysroot is not currently available in the
-default installation.</p>
+<p>Now we need to add our <code>.cargo/config</code> file. This is a configuration file that
+tells cargo how to build for SPIR-V. You need provide the target you're
+compiling for (see <a href="./platform-support.html">platform support</a>) and provide a path to your built <code>rustc_codegen_spirv</code> dynamic
+library. We have to also provide <code>-Zbuild-std</code>.</p>
 <pre><code class="language-toml">[build]
-target = &quot;spirv-unknown-unknown&quot;
-rustflags = [&quot;-Zcodegen-backend=&lt;path_to_librustc_codegen_spirv&gt;&quot;]
+target = &quot;spirv-unknown-spv1.3&quot;
+rustflags = [
+   &quot;-Zcodegen-backend=&lt;path_to_librustc_codegen_spirv&gt;&quot;,
+   &quot;-Zsymbol-mangling-version=v0&quot;
+]
 
 [unstable]
 build-std=[&quot;core&quot;]
+build-std-features=[&quot;compiler-builtins-mem&quot;]
 </code></pre>
-<p>Now we can build our crate with cargo as normal. </p>
+<p>Now we can build our crate with cargo as normal.</p>
 <pre><code class="language-bash">cargo build
 </code></pre>
 <p>Now you should have <code>&lt;project_name&gt;.spv</code> SPIR-V file in <code>target/debug</code> that you
@@ -242,7 +264,7 @@ can give to a renderer.</p>
                         
 
                         
-                            <a rel="next" href="rfcs/001-resource-binding-syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="attributes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -260,7 +282,7 @@ can give to a renderer.</p>
                 
 
                 
-                    <a rel="next" href="rfcs/001-resource-binding-syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="attributes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

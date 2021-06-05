@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="attributes.html"><strong aria-hidden="true">2.</strong> Attribute syntax</a></li><li class="chapter-item expanded "><a href="building-rust-gpu.html"><strong aria-hidden="true">3.</strong> Building Rust-GPU</a></li><li class="chapter-item expanded "><a href="platform-support.html" class="active"><strong aria-hidden="true">4.</strong> Platform Support</a></li><li class="chapter-item expanded "><a href="writing-shader-crates.html"><strong aria-hidden="true">5.</strong> Writing Shader Crates</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> RFCs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rfcs/001-resource-binding-syntax.html"><strong aria-hidden="true">6.1.</strong> Resource Binding Syntax</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Contributing to Rust-GPU</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="building-rust-gpu.html"><strong aria-hidden="true">2.1.</strong> Building</a></li><li class="chapter-item expanded "><a href="testing.html"><strong aria-hidden="true">2.2.</strong> Testing</a></li><li class="chapter-item expanded "><a href="spirv-minimization.html"><strong aria-hidden="true">2.3.</strong> Minimizing bugs in SPIR-V</a></li></ol></li><li class="chapter-item expanded "><a href="platform-support.html" class="active"><strong aria-hidden="true">3.</strong> Platform Support</a></li><li class="chapter-item expanded "><a href="writing-shader-crates.html"><strong aria-hidden="true">4.</strong> Writing Shader Crates</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Features</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="attributes.html"><strong aria-hidden="true">5.1.</strong> Attribute syntax</a></li><li class="chapter-item expanded "><a href="inline-asm.html"><strong aria-hidden="true">5.2.</strong> Inline Assembly</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> RFCs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rfcs/001-resource-binding-syntax.html"><strong aria-hidden="true">6.1.</strong> Resource Binding Syntax</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,13 +136,15 @@
                         </a>
                         
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -163,30 +165,69 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#platform-support" id="platform-support">Platform Support</a></h1>
+                        <h1 id="platform-support"><a class="header" href="#platform-support">Platform Support</a></h1>
 <p>The <code>rust-gpu</code> project currently supports a limited number of platforms and graphics APIs. Right now we're not distributing build artifacts and we're primarily focused on the development of the project, so this is based on the current <code>main</code> branch. There are a lot of different configurations and hardware out there to support, this document is intended to document what is currently supported, what we intend to support, and what isn't supported. Over time as the project stabilises and our CI improves, more platforms and APIs will be supported and tested. Currently support for each topic is divided into the following three categories.</p>
 <ul>
 <li><strong>Primary —</strong> Built and tested on CI.</li>
 <li><strong>Secondary —</strong> Built but <em>not fully tested</em> on CI.</li>
 <li><strong>Tertiary —</strong> Present in the codebase but not built or tested.</li>
 </ul>
-<h2><a class="header" href="#operating-system" id="operating-system">Operating System</a></h2>
+<h2 id="operating-system"><a class="header" href="#operating-system">Operating System</a></h2>
 <table><thead><tr><th>Operating System</th><th>Version</th><th>Support</th><th>Notes</th></tr></thead><tbody>
 <tr><td>Windows</td><td>10+</td><td>Primary</td><td></td></tr>
 <tr><td>Linux</td><td>Ubuntu 18.04+</td><td>Primary</td><td></td></tr>
-<tr><td>macOS</td><td>Catalina (10.15)+</td><td>Secondary</td><td>Using <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a></td></tr>
+<tr><td>macOS</td><td>Catalina (10.15)+</td><td>Secondary</td><td>Using <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a>, requires v1.1.2+</td></tr>
 <tr><td>Android</td><td>Tested 10-11</td><td>Secondary</td><td></td></tr>
 </tbody></table>
-<h2><a class="header" href="#graphics-apis" id="graphics-apis">Graphics APIs</a></h2>
+<h2 id="graphics-apis"><a class="header" href="#graphics-apis">Graphics APIs</a></h2>
 <table><thead><tr><th>Name</th><th>Version</th><th>Support</th><th>Notes</th></tr></thead><tbody>
 <tr><td>SPIR-V</td><td>1.3+</td><td>Primary</td><td></td></tr>
 <tr><td>Vulkan</td><td>1.1+</td><td>Primary</td><td></td></tr>
 <tr><td>WGPU</td><td>0.6</td><td>Primary</td><td>Uses a translation layer to Metal/DX12</td></tr>
 <tr><td>OpenGL</td><td>???</td><td>Tertiary</td><td></td></tr>
 </tbody></table>
-<h2><a class="header" href="#gpu" id="gpu">GPU</a></h2>
+<h3 id="spir-v-targets"><a class="header" href="#spir-v-targets">SPIR-V Targets</a></h3>
+<ul>
+<li><code>spirv-unknown-spv1.0</code></li>
+<li><code>spirv-unknown-spv1.1</code></li>
+<li><code>spirv-unknown-spv1.2</code></li>
+<li><code>spirv-unknown-spv1.3</code></li>
+<li><code>spirv-unknown-spv1.4</code></li>
+<li><code>spirv-unknown-spv1.5</code></li>
+</ul>
+<h3 id="vulkan-targets"><a class="header" href="#vulkan-targets">Vulkan Targets</a></h3>
+<ul>
+<li><code>spirv-unknown-vulkan1.0</code></li>
+<li><code>spirv-unknown-vulkan1.1</code></li>
+<li><code>spirv-unknown-vulkan1.1spv1.4</code></li>
+<li><code>spirv-unknown-vulkan1.2</code></li>
+</ul>
+<h3 id="webgpu-targets"><a class="header" href="#webgpu-targets">WebGPU Targets</a></h3>
+<ul>
+<li><code>spirv-unknown-webgpu0</code></li>
+</ul>
+<h3 id="opengl-targets"><a class="header" href="#opengl-targets">OpenGL Targets</a></h3>
+<ul>
+<li><code>spirv-unknown-opengl4.0</code></li>
+<li><code>spirv-unknown-opengl4.1</code></li>
+<li><code>spirv-unknown-opengl4.2</code></li>
+<li><code>spirv-unknown-opengl4.3</code></li>
+<li><code>spirv-unknown-opengl4.5</code></li>
+</ul>
+<h3 id="opencl-targets"><a class="header" href="#opencl-targets">OpenCL Targets</a></h3>
+<ul>
+<li><code>spirv-unknown-opencl1.2</code></li>
+<li><code>spirv-unknown-opencl1.2embedded</code></li>
+<li><code>spirv-unknown-opencl2.0</code></li>
+<li><code>spirv-unknown-opencl2.0embedded</code></li>
+<li><code>spirv-unknown-opencl2.1</code></li>
+<li><code>spirv-unknown-opencl2.1embedded</code></li>
+<li><code>spirv-unknown-opencl2.2</code></li>
+<li><code>spirv-unknown-opencl2.2embedded</code></li>
+</ul>
+<h2 id="gpu"><a class="header" href="#gpu">GPU</a></h2>
 <p>Currently we don't have specific generations of GPUs for support, as long they support Vulkan 1.1+ with the latest officially installed drivers it should be able build and run the examples. You can check your Vulkan version using the <a href="https://vulkan.lunarg.com/doc/view/latest/windows/vulkaninfo.html"><code>vulkaninfo</code></a> command from the <code>vulkan-sdk</code>.</p>
-<h5><a class="header" href="#drivers" id="drivers">Drivers</a></h5>
+<h5 id="drivers"><a class="header" href="#drivers">Drivers</a></h5>
 <ul>
 <li><a href="https://www.amd.com/en/support/kb/faq/gpu-56"><strong>AMD</strong></a></li>
 <li><strong>Intel:</strong> <a href="https://www.intel.com/content/www/us/en/support/articles/000005520/graphics.html">Linux</a>, <a href="https://www.intel.com/content/www/us/en/support/articles/000022440/graphics.html">macOS</a>, <a href="https://downloadcenter.intel.com/product/80939/Graphics">Windows</a></li>
@@ -198,7 +239,7 @@
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="building-rust-gpu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="spirv-minimization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
@@ -216,7 +257,7 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="building-rust-gpu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="spirv-minimization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 

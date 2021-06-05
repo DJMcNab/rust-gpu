@@ -1,1 +1,0 @@
-initSidebarItems({"trait":[["Vec2Swizzles",""],["Vec3ASwizzles",""],["Vec3Swizzles",""],["Vec4Swizzles",""]]});

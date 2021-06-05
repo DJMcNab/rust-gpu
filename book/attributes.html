@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="attributes.html" class="active"><strong aria-hidden="true">2.</strong> Attribute syntax</a></li><li class="chapter-item expanded "><a href="building-rust-gpu.html"><strong aria-hidden="true">3.</strong> Building Rust-GPU</a></li><li class="chapter-item expanded "><a href="platform-support.html"><strong aria-hidden="true">4.</strong> Platform Support</a></li><li class="chapter-item expanded "><a href="writing-shader-crates.html"><strong aria-hidden="true">5.</strong> Writing Shader Crates</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> RFCs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rfcs/001-resource-binding-syntax.html"><strong aria-hidden="true">6.1.</strong> Resource Binding Syntax</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Contributing to Rust-GPU</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="building-rust-gpu.html"><strong aria-hidden="true">2.1.</strong> Building</a></li><li class="chapter-item expanded "><a href="testing.html"><strong aria-hidden="true">2.2.</strong> Testing</a></li><li class="chapter-item expanded "><a href="spirv-minimization.html"><strong aria-hidden="true">2.3.</strong> Minimizing bugs in SPIR-V</a></li></ol></li><li class="chapter-item expanded "><a href="platform-support.html"><strong aria-hidden="true">3.</strong> Platform Support</a></li><li class="chapter-item expanded "><a href="writing-shader-crates.html"><strong aria-hidden="true">4.</strong> Writing Shader Crates</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Features</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="attributes.html" class="active"><strong aria-hidden="true">5.1.</strong> Attribute syntax</a></li><li class="chapter-item expanded "><a href="inline-asm.html"><strong aria-hidden="true">5.2.</strong> Inline Assembly</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> RFCs</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="rfcs/001-resource-binding-syntax.html"><strong aria-hidden="true">6.1.</strong> Resource Binding Syntax</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -136,13 +136,15 @@
                         </a>
                         
                         
+                        
+
                     </div>
                 </div>
 
                 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -163,52 +165,63 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#attribute-syntax" id="attribute-syntax">Attribute syntax</a></h1>
+                        <h1 id="attribute-syntax"><a class="header" href="#attribute-syntax">Attribute syntax</a></h1>
 <p>rust-gpu introduces a number of SPIR-V related attributes to express behavior specific to SPIR-V not exposed in the base rust language.</p>
 <p>There are a few different categories of attributes:</p>
-<h2><a class="header" href="#entry-points" id="entry-points">Entry points</a></h2>
+<h2 id="entry-points"><a class="header" href="#entry-points">Entry points</a></h2>
 <p>When declaring an entry point to your shader, SPIR-V needs to know what type of function it is. For example, it could be a fragment shader, or vertex shader. Specifying this attribute is also the way rust-gpu knows that you would like to export a function as an entry point, no other functions are exported.</p>
 <p>Example:</p>
 <pre><pre class="playground"><code class="language-rust">#[spirv(fragment)]
 fn main() { }
 </code></pre></pre>
 <p>Common values are <code>#[spirv(fragment)]</code> and <code>#[spirv(vertex)]</code>. A list of all supported names can be found in <a href="https://docs.rs/spirv_headers/1.5.0/spirv_headers/enum.ExecutionModel.html">spirv_headers</a> - convert the enum name to snake_case for the rust-gpu attribute name.</p>
-<h2><a class="header" href="#builtins" id="builtins">Builtins</a></h2>
+<h3 id="compute-shader-dimensions"><a class="header" href="#compute-shader-dimensions">Compute shader dimensions</a></h3>
+<p>The dimensions (<code>local_size_*</code> in openGL, <code>numthreads</code> in DX) of a compute shader must be specified (eg. <code>#[spirv(compute(threads(32, 16, 97)))]</code>).  Trailing ones may be elided.</p>
+<p>Example:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// the x dimension is required
+// same as threads(32, 1, 1)
+#[spirv(compute(threads(32)))]
+pub fn compute_1() {}
+
+// same as threads(32, 57, 1)
+#[spirv(compute(threads(32, 57)))]
+pub fn compute_2() {}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="override-entry-point-name"><a class="header" href="#override-entry-point-name">Override entry point name</a></h3>
+<p>You can override the default <code>OpEntryPoint</code> name for any entry point with the <code>entry_point_name</code> sub-attribute on any of the execution model attributes. (e.g. <code>#[spirv(vertex(entry_point_name=&quot;foo&quot;))]</code>)</p>
+<h2 id="builtins"><a class="header" href="#builtins">Builtins</a></h2>
 <p>When declaring inputs and outputs, sometimes you want to declare it as a &quot;builtin&quot;. This means many things, but one example is <code>gl_Position</code> from glsl - the GPU assigns inherent meaning to the variable and uses it for placing the vertex in clip space. The equivalent in rust-gpu is called <code>position</code>.</p>
 <p>Example:</p>
-<pre><pre class="playground"><code class="language-rust">#[spirv(fragment)]
+<pre><pre class="playground"><code class="language-rust">#[spirv(vertex)]
 fn main(
-    #[spirv(position)] mut out_pos: Output&lt;Vec4&gt;,
+    #[spirv(position)] out_pos: &amp;mut Vec4,
 ) { }
 </code></pre></pre>
 <p>Common values are <code>#[spirv(position)]</code>, <code>#[spirv(vertex_id)]</code>, and many more. A list of all supported names can be found in <a href="https://docs.rs/spirv_headers/1.5.0/spirv_headers/enum.BuiltIn.html">spirv_headers</a> - convert the enum name to snake_case for the rust-gpu attribute name.</p>
-<h2><a class="header" href="#descriptor-set-and-binding" id="descriptor-set-and-binding">Descriptor set and binding</a></h2>
+<h2 id="descriptor-set-and-binding"><a class="header" href="#descriptor-set-and-binding">Descriptor set and binding</a></h2>
 <p>A SPIR-V shader must declare where uniform variables are located with explicit indices that match up with CPU-side code. This can be done with the <code>descriptor_set</code> and <code>binding</code> attributes. Note that <code>descriptor_set = 0</code> is reserved for future use, and cannot be used.</p>
 <p>Example:</p>
 <pre><pre class="playground"><code class="language-rust">#[spirv(fragment)]
 fn main(
-    #[spirv(descriptor_set = 2, binding = 5)] mut var: Uniform&lt;Vec4&gt;,
+    #[spirv(uniform, descriptor_set = 2, binding = 5)] var: &amp;mut Vec4,
 ) { }
 </code></pre></pre>
 <p>Both descriptor_set and binding take an integer argument that specifies the uniform's index.</p>
-<h2><a class="header" href="#block" id="block">Block</a></h2>
-<p>This attribute is a temporary quick fix before we implement a more fully-featured binding model. If you get validation errors about missing a Block decoration on a struct due to being used as uniform block data, try adding this attribute to the struct definition. If you get errors around the struct definition not being an aggregate, but rather the type of the field, try adding <code>#[repr(C)]</code> to the struct definition.</p>
-<p>Example:</p>
-<pre><pre class="playground"><code class="language-rust">#[spirv(block)]
-struct Thing {
-    a: Vec4,
-    b: Vec4,
-    c: Vec4,
-}
-
-#[spirv(fragment)]
-fn main(obj: PushConstant&lt;ShaderConstants&gt;) { }
-</code></pre></pre>
-<h2><a class="header" href="#flat" id="flat">Flat</a></h2>
+<h2 id="flat"><a class="header" href="#flat">Flat</a></h2>
 <p>The flat attribute corresponds to the flat keyword in glsl - in other words, the data is not interpolated across the triangle when invoking the fragment shader.</p>
 <p>Example:</p>
 <pre><pre class="playground"><code class="language-rust">#[spirv(fragment)]
-fn main(#[spirv(flat)] obj: Input&lt;u32&gt;) { }
+fn main(#[spirv(flat)] obj: u32) { }
+</code></pre></pre>
+<h2 id="invariant"><a class="header" href="#invariant">Invariant</a></h2>
+<p>The invariant attribute corresponds to the invariant keyword in glsl. It can only be applied to output variables.</p>
+<p>Example:</p>
+<pre><pre class="playground"><code class="language-rust">#[spirv(vertex)]
+fn main(#[spirv(invariant)] var: &amp;mut f32) { }
 </code></pre></pre>
 
                     </main>
@@ -216,13 +229,13 @@ fn main(#[spirv(flat)] obj: Input&lt;u32&gt;) { }
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="writing-shader-crates.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="building-rust-gpu.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="inline-asm.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -234,13 +247,13 @@ fn main(#[spirv(flat)] obj: Input&lt;u32&gt;) { }
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="writing-shader-crates.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="building-rust-gpu.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="inline-asm.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
