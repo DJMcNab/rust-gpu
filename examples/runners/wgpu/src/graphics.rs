@@ -1,4 +1,4 @@
-use crate::maybe_watch;
+use crate::{maybe_watch, RustGPUShader};
 
 use super::Options;
 use shared::ShaderConstants;
@@ -32,11 +32,26 @@ fn mouse_button_index(button: MouseButton) -> usize {
     }
 }
 
+impl RustGPUShader {
+    /// Returns the [`ControlFlow`] this shader should use
+    ///
+    /// Returns [`None`] if this shader should not be used for graphics
+    fn expected_control_flow(self) -> Option<ControlFlow> {
+        match self {
+            RustGPUShader::Compute => None,
+            // The mouse shader updates based on how long the shader has been running for
+            RustGPUShader::Mouse => Some(ControlFlow::Poll),
+            RustGPUShader::Simplest | RustGPUShader::Sky => Some(ControlFlow::Wait),
+        }
+    }
+}
+
 async fn run(
     event_loop: EventLoop<wgpu::ShaderModuleDescriptor<'static>>,
     window: Window,
     swapchain_format: wgpu::TextureFormat,
     shader_binary: wgpu::ShaderModuleDescriptor<'static>,
+    flow: ControlFlow,
 ) {
     let size = window.inner_size();
     let instance = wgpu::Instance::new(wgpu::BackendBit::VULKAN | wgpu::BackendBit::METAL);
@@ -119,7 +134,7 @@ async fn run(
         let _ = (&instance, &adapter, &pipeline_layout);
         let render_pipeline = &mut render_pipeline;
 
-        *control_flow = ControlFlow::Wait;
+        *control_flow = flow;
         match event {
             Event::MainEventsCleared => {
                 window.request_redraw();
@@ -316,6 +331,7 @@ pub fn start(options: &Options) {
             Err(_) => panic!("Event loop dead"),
         })),
     );
+    let flow = options.shader.expected_control_flow().unwrap();
 
     let window = winit::window::WindowBuilder::new()
         .with_title("Rust GPU - wgpu")
@@ -343,6 +359,7 @@ pub fn start(options: &Options) {
                 window,
                 wgpu::TextureFormat::Bgra8Unorm,
                 initial_shader,
+                flow
             ));
         } else {
             wgpu_subscriber::initialize_default_subscriber(None);
@@ -355,7 +372,7 @@ pub fn start(options: &Options) {
                     wgpu::TextureFormat::Bgra8UnormSrgb
                 },
                 initial_shader,
-
+                flow
             ));
         }
     }
