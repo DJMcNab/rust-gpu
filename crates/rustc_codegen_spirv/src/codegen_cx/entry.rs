@@ -313,11 +313,43 @@ impl<'tcx> CodegenCx<'tcx> {
                 .sess
                 .span_fatal(hir_param.ty_span, "pair type not supported yet")
         }
+
+        let non_writable = if let Some(non_writable) = attrs.non_writable {
+            match storage_class {
+                StorageClass::Image | StorageClass::StorageBuffer => true,
+                _ => {
+                    self.tcx.sess.span_err(
+                        non_writable.span,
+                        "#[spirv(non_writable)] is only valid on Image and StorageBuffer variables",
+                    );
+                    false
+                }
+            }
+        } else {
+            false
+        };
+        let non_readable = if let Some(non_readable) = attrs.non_readable {
+            match storage_class {
+                StorageClass::Image | StorageClass::StorageBuffer => true,
+                _ => {
+                    self.tcx.sess.span_err(
+                        non_readable.span,
+                        "#[spirv(non_readable)] is only valid on Image and StorageBuffer variables",
+                    );
+                    false
+                }
+            }
+        } else {
+            false
+        };
+
         let var_ptr_spirv_type;
         let (value_ptr, value_len) = match storage_class {
             StorageClass::PushConstant | StorageClass::Uniform | StorageClass::StorageBuffer => {
                 let var_spirv_type = SpirvType::InterfaceBlock {
                     inner_type: value_spirv_type,
+                    non_readable,
+                    non_writable
                 }
                 .def(hir_param.span, self);
                 var_ptr_spirv_type = self.type_ptr_to(var_spirv_type);

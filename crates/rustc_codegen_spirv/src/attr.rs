@@ -86,6 +86,8 @@ pub enum SpirvAttribute {
     Binding(u32),
     Flat,
     Invariant,
+    NonWritable,
+    NonReadable,
     InputAttachmentIndex(u32),
 
     // `fn`/closure attributes:
@@ -121,6 +123,8 @@ pub struct AggregatedSpirvAttributes {
     pub binding: Option<Spanned<u32>>,
     pub flat: Option<Spanned<()>>,
     pub invariant: Option<Spanned<()>>,
+    pub non_writable: Option<Spanned<()>>,
+    pub non_readable: Option<Spanned<()>>,
     pub input_attachment_index: Option<Spanned<u32>>,
 
     // `fn`/closure attributes:
@@ -207,6 +211,8 @@ impl AggregatedSpirvAttributes {
             Binding(value) => try_insert(&mut self.binding, value, span, "#[spirv(binding)]"),
             Flat => try_insert(&mut self.flat, (), span, "#[spirv(flat)]"),
             Invariant => try_insert(&mut self.invariant, (), span, "#[spirv(invariant)]"),
+            NonWritable => try_insert(&mut self.non_writable, (), span, "#[spirv(non_writable)]"),
+            NonReadable => try_insert(&mut self.non_readable, (), span, "#[spirv(non_readable)]"),
             InputAttachmentIndex(value) => try_insert(
                 &mut self.input_attachment_index,
                 value,
@@ -303,6 +309,8 @@ impl CheckSpirvAttrVisitor<'_> {
                 | SpirvAttribute::Binding(_)
                 | SpirvAttribute::Flat
                 | SpirvAttribute::Invariant
+                | SpirvAttribute::NonWritable
+                | SpirvAttribute::NonReadable
                 | SpirvAttribute::InputAttachmentIndex(_) => match target {
                     Target::Param => {
                         let parent_hir_id = self.tcx.hir().get_parent_node(hir_id);
