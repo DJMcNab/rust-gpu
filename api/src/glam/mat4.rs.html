@@ -1,7 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/glam-0.15.2/src/mat4.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mat4.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../glam/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;Users&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;glam-0.19.0&#x2F;src&#x2F;mat4.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mat4.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../glam/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -874,15 +871,40 @@
 <span id="871">871</span>
 <span id="872">872</span>
 <span id="873">873</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core</span>::{
+<span id="874">874</span>
+<span id="875">875</span>
+<span id="876">876</span>
+<span id="877">877</span>
+<span id="878">878</span>
+<span id="879">879</span>
+<span id="880">880</span>
+<span id="881">881</span>
+<span id="882">882</span>
+<span id="883">883</span>
+<span id="884">884</span>
+<span id="885">885</span>
+<span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
+<span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
+<span id="898">898</span>
+<span id="899">899</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::core</span>::{
     <span class="ident">storage</span>::{<span class="ident">Columns4</span>, <span class="ident">XYZW</span>},
     <span class="ident">traits</span>::{
         <span class="ident">matrix</span>::{<span class="ident">FloatMatrix4x4</span>, <span class="ident">Matrix4x4</span>, <span class="ident">MatrixConst</span>},
         <span class="ident">projection::ProjectionMatrix</span>,
     },
 };
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">DQuat</span>, <span class="ident">DVec3</span>, <span class="ident">DVec4</span>, <span class="ident">EulerRot</span>, <span class="ident">Quat</span>, <span class="ident">Vec3</span>, <span class="ident">Vec3A</span>, <span class="ident">Vec4</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">DMat3</span>, <span class="ident">DQuat</span>, <span class="ident">DVec3</span>, <span class="ident">DVec4</span>, <span class="ident">EulerRot</span>, <span class="ident">Mat3</span>, <span class="ident">Quat</span>, <span class="ident">Vec3</span>, <span class="ident">Vec3A</span>, <span class="ident">Vec4</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(
     <span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;sse2&quot;</span>,
@@ -897,12 +919,13 @@
 ))]</span>
 <span class="kw">use</span> <span class="ident">core::arch::x86_64</span>::<span class="kw-2">*</span>;
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;simd128&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident">core::arch::wasm32::v128</span>;
+
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spirv&quot;</span>))]</span>
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
-<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">Mul</span>, <span class="ident">Sub</span>};
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">std::iter</span>::{<span class="ident">Product</span>, <span class="ident">Sum</span>};
+<span class="kw">use</span> <span class="ident">core::iter</span>::{<span class="ident">Product</span>, <span class="ident">Sum</span>};
+<span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">AddAssign</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">Mul</span>, <span class="ident">MulAssign</span>, <span class="ident">Sub</span>, <span class="ident">SubAssign</span>};
 
 <span class="comment">//macro_rules! define_mat4_struct {</span>
 <span class="comment">//    ($mat4:ident, $inner:ident) =&gt; {</span>
@@ -940,12 +963,15 @@
 <span class="comment">//}</span>
 
 <span class="macro">macro_rules!</span> <span class="ident">impl_mat4_methods</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">quat</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat3</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">quat</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="doccomment">/// A 4x4 matrix with all elements set to `0.0`.</span>
         <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZERO</span>: <span class="self">Self</span> <span class="op">=</span> <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::ZERO</span>);
 
         <span class="doccomment">/// A 4x4 identity matrix, where all diagonal elements are `1`, and all off-diagonal elements are `0`.</span>
         <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IDENTITY</span>: <span class="self">Self</span> <span class="op">=</span> <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::IDENTITY</span>);
+
+        <span class="doccomment">/// All NAN:s.</span>
+        <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NAN</span>: <span class="self">Self</span> <span class="op">=</span> <span class="self">Self</span>(<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner</span> <span class="kw">as</span> <span class="ident"><span class="kw">crate</span>::core::traits::scalar::NanConstEx</span><span class="op">&gt;</span><span class="ident">::NAN</span>);
 
         <span class="doccomment">/// Creates a 4x4 matrix from four column vectors.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
@@ -984,7 +1010,7 @@
         }
 
         <span class="doccomment">/// Creates a 4x4 matrix with its diagonal set to `diagonal` and all other entries set to 0.</span>
-        <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">doc</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>))]</span>
+        <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;scale&quot;</span>)]</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_diagonal</span>(<span class="ident">diagonal</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::from_diagonal</span>(<span class="ident">diagonal</span>.<span class="number">0</span>.<span class="ident">into</span>()))
@@ -995,6 +1021,10 @@
         <span class="doccomment">///</span>
         <span class="doccomment">/// The resulting matrix can be used to transform 3D points and vectors. See</span>
         <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `rotation` is not normalized when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_scale_rotation_translation</span>(
             <span class="ident">scale</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>,
@@ -1012,6 +1042,10 @@
         <span class="doccomment">///</span>
         <span class="doccomment">/// The resulting matrix can be used to transform 3D points and vectors. See</span>
         <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `rotation` is not normalized when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_rotation_translation</span>(<span class="ident">rotation</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">quat</span>, <span class="ident">translation</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::from_quaternion_translation</span>(
@@ -1022,6 +1056,11 @@
 
         <span class="doccomment">/// Extracts `scale`, `rotation` and `translation` from `self`. The input matrix is</span>
         <span class="doccomment">/// expected to be a 3D affine transformation matrix otherwise the output will be invalid.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if the determinant of `self` is zero or if the resulting scale vector</span>
+        <span class="doccomment">/// contains any zero elements when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_scale_rotation_translation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">quat</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) {
             <span class="kw">let</span> (<span class="ident">scale</span>, <span class="ident">rotation</span>, <span class="ident">translation</span>) <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">to_scale_quaternion_translation</span>();
@@ -1032,9 +1071,28 @@
         <span class="doccomment">///</span>
         <span class="doccomment">/// The resulting matrix can be used to transform 3D points and vectors. See</span>
         <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `rotation` is not normalized when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_quat</span>(<span class="ident">rotation</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">quat</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::from_quaternion</span>(<span class="ident">rotation</span>.<span class="number">0</span>))
+        }
+
+        <span class="doccomment">/// Creates an affine transformation matrix from the given 3x3 linear transformation</span>
+        <span class="doccomment">/// matrix.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// The resulting matrix can be used to transform 3D points and vectors. See</span>
+        <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
+        <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_mat3</span>(<span class="ident">m</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+            <span class="ident"><span class="self">Self</span>::from_cols</span>(
+                (<span class="ident">m</span>.<span class="ident">x_axis</span>, <span class="number">0.0</span>).<span class="ident">into</span>(),
+                (<span class="ident">m</span>.<span class="ident">y_axis</span>, <span class="number">0.0</span>).<span class="ident">into</span>(),
+                (<span class="ident">m</span>.<span class="ident">z_axis</span>, <span class="number">0.0</span>).<span class="ident">into</span>(),
+                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4::W</span>,
+            )
         }
 
         <span class="doccomment">/// Creates an affine transformation matrix from the given 3D `translation`.</span>
@@ -1051,18 +1109,13 @@
         <span class="doccomment">///</span>
         <span class="doccomment">/// The resulting matrix can be used to transform 3D points and vectors. See</span>
         <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `axis` is not normalized when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_axis_angle</span>(<span class="ident">axis</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>, <span class="ident">angle</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::from_axis_angle</span>(<span class="ident">axis</span>.<span class="number">0</span>, <span class="ident">angle</span>))
-        }
-
-        <span class="attribute">#[<span class="ident">deprecated</span>(
-            <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.15.0&quot;</span>,
-            <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Please use `from_euler(EulerRot::YXZ, yaw, pitch, roll)` instead&quot;</span>
-        )]</span>
-        <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_rotation_ypr</span>(<span class="ident">yaw</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">pitch</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">roll</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-            <span class="self">Self</span><span class="ident">::from_euler</span>(<span class="ident">EulerRot::YXZ</span>, <span class="ident">yaw</span>, <span class="ident">pitch</span>, <span class="ident">roll</span>)
         }
 
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
@@ -1073,7 +1126,7 @@
         <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_euler</span>(<span class="ident">order</span>: <span class="ident">EulerRot</span>, <span class="ident">a</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">b</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">c</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="kw">let</span> <span class="ident">quat</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">quat::from_euler</span>(<span class="ident">order</span>, <span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>);
-            <span class="self">Self</span><span class="ident">::from_quat</span>(<span class="ident">quat</span>)
+            <span class="ident"><span class="self">Self</span>::from_quat</span>(<span class="ident">quat</span>)
         }
 
         <span class="doccomment">/// Creates an affine transformation matrix containing a 3D rotation around the x axis of</span>
@@ -1110,6 +1163,10 @@
         <span class="doccomment">///</span>
         <span class="doccomment">/// The resulting matrix can be used to transform 3D points and vectors. See</span>
         <span class="doccomment">/// [`Self::transform_point3()`] and [`Self::transform_vector3()`].</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if all elements of `scale` are zero when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_scale</span>(<span class="ident">scale</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::from_scale</span>(<span class="ident">scale</span>.<span class="number">0</span>))
@@ -1147,10 +1204,23 @@
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">y_axis</span>,
                 <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">z_axis</span>,
                 <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">w_axis</span>,
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(
-                    <span class="string">&quot;index out of bounds: the len is 4 but the index is {}&quot;</span>,
-                    <span class="ident">index</span>
-                ),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;index out of bounds&quot;</span>),
+            }
+        }
+
+        <span class="doccomment">/// Returns a mutable reference to the matrix column for the given `index`.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Panics if `index` is greater than 3.</span>
+        <span class="attribute">#[<span class="ident">inline</span>]</span>
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">col_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span> {
+            <span class="kw">match</span> <span class="ident">index</span> {
+                <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">x_axis</span>,
+                <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">y_axis</span>,
+                <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">z_axis</span>,
+                <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">w_axis</span>,
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;index out of bounds&quot;</span>),
             }
         }
 
@@ -1166,26 +1236,9 @@
                 <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4::new</span>(<span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">y</span>),
                 <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4::new</span>(<span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">z</span>, <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">z</span>, <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">z</span>, <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">z</span>),
                 <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4::new</span>(<span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">w</span>),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(
-                    <span class="string">&quot;index out of bounds: the len is 3 but the index is {}&quot;</span>,
-                    <span class="ident">index</span>
-                ),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;index out of bounds&quot;</span>),
             }
         }
-
-        <span class="comment">// #[inline]</span>
-        <span class="comment">// pub(crate) fn col_mut(&amp;mut self, index: usize) -&gt; &amp;mut $vec4 {</span>
-        <span class="comment">//     match index {</span>
-        <span class="comment">//         0 =&gt; &amp;mut self.x_axis,</span>
-        <span class="comment">//         1 =&gt; &amp;mut self.y_axis,</span>
-        <span class="comment">//         2 =&gt; &amp;mut self.z_axis,</span>
-        <span class="comment">//         3 =&gt; &amp;mut self.w_axis,</span>
-        <span class="comment">//         _ =&gt; panic!(</span>
-        <span class="comment">//             &quot;index out of bounds: the len is 4 but the index is {}&quot;,</span>
-        <span class="comment">//             index</span>
-        <span class="comment">//         ),</span>
-        <span class="comment">//     }</span>
-        <span class="comment">// }</span>
 
         <span class="doccomment">/// Returns `true` if, and only if, all elements are finite.</span>
         <span class="doccomment">/// If any element is either `NaN`, positive or negative infinity, this will return `false`.</span>
@@ -1207,6 +1260,7 @@
         }
 
         <span class="doccomment">/// Returns the transpose of `self`.</span>
+        <span class="attribute">#[<span class="ident">must_use</span>]</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transpose</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">transpose</span>())
@@ -1221,6 +1275,11 @@
         <span class="doccomment">/// Returns the inverse of `self`.</span>
         <span class="doccomment">///</span>
         <span class="doccomment">/// If the matrix is not invertible the returned matrix will be invalid.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if the determinant of `self` is zero when `glam_assert` is enabled.</span>
+        <span class="attribute">#[<span class="ident">must_use</span>]</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">inverse</span>())
@@ -1229,6 +1288,10 @@
         <span class="doccomment">/// Creates a left-handed view matrix using a camera position, an up direction, and a focal</span>
         <span class="doccomment">/// point.</span>
         <span class="doccomment">/// For a view coordinate system with `+X=right`, `+Y=up` and `+Z=forward`.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `up` is not normalized when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">look_at_lh</span>(<span class="ident">eye</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>, <span class="ident">center</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>, <span class="ident">up</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::look_at_lh</span>(<span class="ident">eye</span>.<span class="number">0</span>, <span class="ident">center</span>.<span class="number">0</span>, <span class="ident">up</span>.<span class="number">0</span>))
@@ -1237,6 +1300,10 @@
         <span class="doccomment">/// Creates a right-handed view matrix using a camera position, an up direction, and a focal</span>
         <span class="doccomment">/// point.</span>
         <span class="doccomment">/// For a view coordinate system with `+X=right`, `+Y=up` and `+Z=back`.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `up` is not normalized when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">look_at_rh</span>(<span class="ident">eye</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>, <span class="ident">center</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>, <span class="ident">up</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::look_at_rh</span>(<span class="ident">eye</span>.<span class="number">0</span>, <span class="ident">center</span>.<span class="number">0</span>, <span class="ident">up</span>.<span class="number">0</span>))
@@ -1244,7 +1311,7 @@
 
         <span class="doccomment">/// Creates a right-handed perspective projection matrix with [-1,1] depth range.</span>
         <span class="doccomment">/// This is the same as the OpenGL `gluPerspective` function.</span>
-        <span class="doccomment">/// See https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/gluPerspective.xml</span>
+        <span class="doccomment">/// See &lt;https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/gluPerspective.xml&gt;</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">perspective_rh_gl</span>(
             <span class="ident">fov_y_radians</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>,
@@ -1261,6 +1328,11 @@
         }
 
         <span class="doccomment">/// Creates a left-handed perspective projection matrix with `[0,1]` depth range.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `z_near` or `z_far` are less than or equal to zero when `glam_assert` is</span>
+        <span class="doccomment">/// enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">perspective_lh</span>(<span class="ident">fov_y_radians</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">aspect_ratio</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">z_near</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">z_far</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::perspective_lh</span>(
@@ -1272,6 +1344,11 @@
         }
 
         <span class="doccomment">/// Creates a right-handed perspective projection matrix with `[0,1]` depth range.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `z_near` or `z_far` are less than or equal to zero when `glam_assert` is</span>
+        <span class="doccomment">/// enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">perspective_rh</span>(<span class="ident">fov_y_radians</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">aspect_ratio</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">z_near</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">z_far</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::perspective_rh</span>(
@@ -1283,6 +1360,10 @@
         }
 
         <span class="doccomment">/// Creates an infinite left-handed perspective projection matrix with `[0,1]` depth range.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `z_near` is less than or equal to zero when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">perspective_infinite_lh</span>(<span class="ident">fov_y_radians</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">aspect_ratio</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="ident">z_near</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="self">Self</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">inner::perspective_infinite_lh</span>(
@@ -1293,6 +1374,10 @@
         }
 
         <span class="doccomment">/// Creates an infinite left-handed perspective projection matrix with `[0,1]` depth range.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if `z_near` is less than or equal to zero when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">perspective_infinite_reverse_lh</span>(
             <span class="ident">fov_y_radians</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>,
@@ -1335,7 +1420,7 @@
         <span class="doccomment">/// Creates a right-handed orthographic projection matrix with `[-1,1]` depth</span>
         <span class="doccomment">/// range.  This is the same as the OpenGL `glOrtho` function in OpenGL.</span>
         <span class="doccomment">/// See</span>
-        <span class="doccomment">/// https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glOrtho.xml</span>
+        <span class="doccomment">/// &lt;https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glOrtho.xml&gt;</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">orthographic_rh_gl</span>(
             <span class="ident">left</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>,
@@ -1379,7 +1464,7 @@
         <span class="doccomment">/// Transforms a 4D vector.</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mul_vec4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span> {
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">mul_vector</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="number">0</span>))
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">mul_vector</span>(<span class="ident">other</span>.<span class="number">0</span>))
         }
 
         <span class="doccomment">/// Multiplies two 4x4 matrices.</span>
@@ -1425,6 +1510,10 @@
         <span class="doccomment">/// This method assumes that `self` contains a valid affine transform. It does not perform</span>
         <span class="doccomment">/// a persective divide, if `self` contains a perspective transform, or if you are unsure,</span>
         <span class="doccomment">/// the [`Self::project_point3()`] method should be used instead.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if the 3rd row of `self` is not `(0, 0, 0, 1)` when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_point3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span> {
             <span class="macro">glam_assert!</span>(<span class="self">self</span>.<span class="ident">row</span>(<span class="number">3</span>) <span class="op">=</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4::W</span>);
@@ -1437,6 +1526,10 @@
         <span class="doccomment">/// `0.0`.</span>
         <span class="doccomment">///</span>
         <span class="doccomment">/// This method assumes that `self` contains a valid affine transform.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// # Panics</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Will panic if the 3rd row of `self` is not `(0, 0, 0, 1)` when `glam_assert` is enabled.</span>
         <span class="attribute">#[<span class="ident">inline</span>]</span>
         <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transform_vector3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec3</span> {
             <span class="macro">glam_assert!</span>(<span class="self">self</span>.<span class="ident">row</span>(<span class="number">3</span>) <span class="op">=</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4::W</span>);
@@ -1467,10 +1560,20 @@
             <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4::from_cols</span>(<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>, <span class="ident">w_axis</span>)
         }
 
-        <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
+        <span class="macro">impl_matn_common_traits!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>);
+
+        <span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
+            <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">Columns4</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span><span class="op">&gt;</span>;
             <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-                <span class="self">Self</span><span class="ident">::IDENTITY</span>
+            <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
+                <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident"><span class="self">Self</span>::Target</span>) }
+            }
+        }
+
+        <span class="kw">impl</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
+            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+            <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Target</span> {
+                <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Target</span>) }
             }
         }
 
@@ -1484,6 +1587,7 @@
             }
         }
 
+        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spriv&quot;</span>))]</span>
         <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>; <span class="number">16</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>; <span class="number">16</span>] {
@@ -1491,6 +1595,7 @@
             }
         }
 
+        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spriv&quot;</span>))]</span>
         <span class="kw">impl</span> <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>; <span class="number">16</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>; <span class="number">16</span>] {
@@ -1498,72 +1603,9 @@
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-                <span class="self">self</span>.<span class="ident">add_mat4</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-                <span class="self">self</span>.<span class="ident">sub_mat4</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-                <span class="self">self</span>.<span class="ident">mul_mat4</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-                <span class="self">self</span>.<span class="ident">mul_vec4</span>(<span class="ident">other</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-                <span class="ident">other</span>.<span class="ident">mul_scalar</span>(<span class="self">self</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-                <span class="self">self</span>.<span class="ident">mul_scalar</span>(<span class="ident">other</span>)
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">Columns4</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">vec4</span><span class="op">&gt;</span>;
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span><span class="ident">::Target</span> {
-                <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="self">Self</span><span class="ident">::Target</span>) }
-            }
-        }
-
-        <span class="kw">impl</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-            <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Target</span> {
-                <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="self">Self</span><span class="ident">::Target</span>) }
-            }
-        }
-
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spirv&quot;</span>))]</span>
         <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
                 <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span>))
                     .<span class="ident">field</span>(<span class="string">&quot;x_axis&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">x_axis</span>)
                     .<span class="ident">field</span>(<span class="string">&quot;y_axis&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">y_axis</span>)
@@ -1575,32 +1617,12 @@
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spirv&quot;</span>))]</span>
         <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
                 <span class="macro">write!</span>(
                     <span class="ident">f</span>,
                     <span class="string">&quot;[{}, {}, {}, {}]&quot;</span>,
                     <span class="self">self</span>.<span class="ident">x_axis</span>, <span class="self">self</span>.<span class="ident">y_axis</span>, <span class="self">self</span>.<span class="ident">z_axis</span>, <span class="self">self</span>.<span class="ident">w_axis</span>
                 )
-            }
-        }
-
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Sum</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">fn</span> <span class="ident">sum</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
-            <span class="kw">where</span>
-                <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span><span class="op">&gt;</span>,
-            {
-                <span class="ident">iter</span>.<span class="ident">fold</span>(<span class="self">Self</span><span class="ident">::ZERO</span>, <span class="op">|</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="self">Self</span><span class="ident">::add</span>(<span class="ident">a</span>, <span class="ident">b</span>))
-            }
-        }
-
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Product</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mat4</span> {
-            <span class="kw">fn</span> <span class="ident">product</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
-            <span class="kw">where</span>
-                <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">Self</span><span class="op">&gt;</span>,
-            {
-                <span class="ident">iter</span>.<span class="ident">fold</span>(<span class="self">Self</span><span class="ident">::IDENTITY</span>, <span class="op">|</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span><span class="op">|</span> <span class="self">Self</span><span class="ident">::mul</span>(<span class="ident">a</span>, <span class="ident">b</span>))
             }
         }
     };
@@ -1609,14 +1631,21 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;sse2&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scalar-math&quot;</span>)))]</span>
 <span class="kw">type</span> <span class="ident">InnerF32</span> <span class="op">=</span> <span class="ident">Columns4</span><span class="op">&lt;</span><span class="ident">__m128</span><span class="op">&gt;</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">not</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;sse2&quot;</span>), <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scalar-math&quot;</span>))]</span>
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;simd128&quot;</span>, <span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scalar-math&quot;</span>)))]</span>
+<span class="kw">type</span> <span class="ident">InnerF32</span> <span class="op">=</span> <span class="ident">Columns4</span><span class="op">&lt;</span><span class="ident">v128</span><span class="op">&gt;</span>;
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
+    <span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;sse2&quot;</span>, <span class="ident">target_feature</span> <span class="op">=</span> <span class="string">&quot;simd128&quot;</span>)),
+    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scalar-math&quot;</span>
+))]</span>
 <span class="kw">type</span> <span class="ident">InnerF32</span> <span class="op">=</span> <span class="ident">Columns4</span><span class="op">&lt;</span><span class="ident">XYZW</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// A 4x4 column major matrix.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This 4x4 matrix type features convenience methods for creating and using affine transforms and</span>
 <span class="doccomment">/// perspective projections. If you are primarily dealing with 3D affine transformations</span>
-<span class="doccomment">/// condidering using [`Affine3A`] which is faster tha a 4x4 matrix for some affine operations.</span>
+<span class="doccomment">/// considering using [`Affine3A`][crate::Affine3A] which is faster tha a 4x4 matrix for some</span>
+<span class="doccomment">/// affine operations.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Affine transformations including 3D translation, rotation and scale can be created</span>
 <span class="doccomment">/// using methods such as [`Self::from_translation()`], [`Self::from_quat()`],</span>
@@ -1650,7 +1679,7 @@
 <span class="comment">// define_mat4_struct!(Mat4, InnerF32);</span>
 
 <span class="kw">impl</span> <span class="ident">Mat4</span> {
-    <span class="macro">impl_mat4_methods!</span>(<span class="ident">f32</span>, <span class="ident">Vec4</span>, <span class="ident">Vec3</span>, <span class="ident">Quat</span>, <span class="ident">InnerF32</span>);
+    <span class="macro">impl_mat4_methods!</span>(<span class="ident">f32</span>, <span class="ident">Vec4</span>, <span class="ident">Vec3</span>, <span class="ident">Mat3</span>, <span class="ident">Quat</span>, <span class="ident">InnerF32</span>);
 
     <span class="doccomment">/// Transforms the given `Vec3A` as 3D point.</span>
     <span class="doccomment">///</span>
@@ -1670,13 +1699,19 @@
         <span class="ident">Vec3A</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">transform_float4_as_vector3</span>(<span class="ident">other</span>.<span class="number">0</span>.<span class="ident">into</span>()).<span class="ident">into</span>())
     }
 
+    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.18.0&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;please use `as_dmat4()` instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DMat4</span> {
+        <span class="self">self</span>.<span class="ident">as_dmat4</span>()
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_dmat4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DMat4</span> {
         <span class="ident">DMat4::from_cols</span>(
-            <span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">as_f64</span>(),
-            <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">as_f64</span>(),
-            <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">as_f64</span>(),
-            <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">as_f64</span>(),
+            <span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">as_dvec4</span>(),
+            <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">as_dvec4</span>(),
+            <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">as_dvec4</span>(),
+            <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">as_dvec4</span>(),
         )
     }
 }
@@ -1688,7 +1723,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This 4x4 matrix type features convenience methods for creating and using affine transforms and</span>
 <span class="doccomment">/// perspective projections. If you are primarily dealing with 3D affine transformations</span>
-<span class="doccomment">/// condidering using [`DAffine3`] which is faster tha a 4x4 matrix for some affine operations.</span>
+<span class="doccomment">/// considering using [`DAffine3`][crate::DAffine3] which is faster tha a 4x4 matrix for some</span>
+<span class="doccomment">/// affine operations.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Affine transformations including 3D translation, rotation and scale can be created</span>
 <span class="doccomment">/// using methods such as [`Self::from_translation()`], [`Self::from_quat()`],</span>
@@ -1718,15 +1754,21 @@
 <span class="comment">// define_mat4_struct!(DMat4, InnerF64);</span>
 
 <span class="kw">impl</span> <span class="ident">DMat4</span> {
-    <span class="macro">impl_mat4_methods!</span>(<span class="ident">f64</span>, <span class="ident">DVec4</span>, <span class="ident">DVec3</span>, <span class="ident">DQuat</span>, <span class="ident">InnerF64</span>);
+    <span class="macro">impl_mat4_methods!</span>(<span class="ident">f64</span>, <span class="ident">DVec4</span>, <span class="ident">DVec3</span>, <span class="ident">DMat3</span>, <span class="ident">DQuat</span>, <span class="ident">InnerF64</span>);
 
+    <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.18.0&quot;</span>, <span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;please use `as_mat4()` instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_f32</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Mat4</span> {
+        <span class="self">self</span>.<span class="ident">as_mat4</span>()
+    }
+
+    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mat4</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Mat4</span> {
         <span class="ident">Mat4::from_cols</span>(
-            <span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">as_f32</span>(),
-            <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">as_f32</span>(),
-            <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">as_f32</span>(),
-            <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">as_f32</span>(),
+            <span class="self">self</span>.<span class="ident">x_axis</span>.<span class="ident">as_vec4</span>(),
+            <span class="self">self</span>.<span class="ident">y_axis</span>.<span class="ident">as_vec4</span>(),
+            <span class="self">self</span>.<span class="ident">z_axis</span>.<span class="ident">as_vec4</span>(),
+            <span class="self">self</span>.<span class="ident">w_axis</span>.<span class="ident">as_vec4</span>(),
         )
     }
 }
@@ -1734,20 +1776,27 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scalar-math&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spriv&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">const_test_mat4</span> {
-    <span class="macro">const_assert_eq!</span>(<span class="number">4</span>, <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="kw">super</span><span class="ident">::Mat4</span><span class="op">&gt;</span>());
-    <span class="macro">const_assert_eq!</span>(<span class="number">64</span>, <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="kw">super</span><span class="ident">::Mat4</span><span class="op">&gt;</span>());
+    <span class="macro">const_assert_eq!</span>(
+        <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>(),
+        <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::Mat4</span><span class="op">&gt;</span>()
+    );
+    <span class="macro">const_assert_eq!</span>(<span class="number">64</span>, <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::Mat4</span><span class="op">&gt;</span>());
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;scalar-math&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;spriv&quot;</span>)))]</span>
 <span class="kw">mod</span> <span class="ident">const_test_mat4</span> {
-    <span class="macro">const_assert_eq!</span>(<span class="number">16</span>, <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="kw">super</span><span class="ident">::Mat4</span><span class="op">&gt;</span>());
-    <span class="macro">const_assert_eq!</span>(<span class="number">64</span>, <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="kw">super</span><span class="ident">::Mat4</span><span class="op">&gt;</span>());
+    <span class="macro">const_assert_eq!</span>(<span class="number">16</span>, <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::Mat4</span><span class="op">&gt;</span>());
+    <span class="macro">const_assert_eq!</span>(<span class="number">64</span>, <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::Mat4</span><span class="op">&gt;</span>());
 }
 
 <span class="kw">mod</span> <span class="ident">const_test_dmat4</span> {
-    <span class="macro">const_assert_eq!</span>(<span class="number">8</span>, <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="kw">super</span><span class="ident">::DMat4</span><span class="op">&gt;</span>());
-    <span class="macro">const_assert_eq!</span>(<span class="number">128</span>, <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="kw">super</span><span class="ident">::DMat4</span><span class="op">&gt;</span>());
+    <span class="macro">const_assert_eq!</span>(
+        <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>(),
+        <span class="ident">core::mem::align_of</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::DMat4</span><span class="op">&gt;</span>()
+    );
+    <span class="macro">const_assert_eq!</span>(<span class="number">128</span>, <span class="ident">core::mem::size_of</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::DMat4</span><span class="op">&gt;</span>());
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="glam" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>
+    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</body></html>

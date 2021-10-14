@@ -1,7 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates/rustc_codegen_spirv/src/abi.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>abi.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustc_codegen_spirv/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;rustc_codegen_spirv&#x2F;src&#x2F;abi.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>abi.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../rustc_codegen_spirv/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -901,71 +898,33 @@
 <span id="898">898</span>
 <span id="899">899</span>
 <span id="900">900</span>
-<span id="901">901</span>
-<span id="902">902</span>
-<span id="903">903</span>
-<span id="904">904</span>
-<span id="905">905</span>
-<span id="906">906</span>
-<span id="907">907</span>
-<span id="908">908</span>
-<span id="909">909</span>
-<span id="910">910</span>
-<span id="911">911</span>
-<span id="912">912</span>
-<span id="913">913</span>
-<span id="914">914</span>
-<span id="915">915</span>
-<span id="916">916</span>
-<span id="917">917</span>
-<span id="918">918</span>
-<span id="919">919</span>
-<span id="920">920</span>
-<span id="921">921</span>
-<span id="922">922</span>
-<span id="923">923</span>
-<span id="924">924</span>
-<span id="925">925</span>
-<span id="926">926</span>
-<span id="927">927</span>
-<span id="928">928</span>
-<span id="929">929</span>
-<span id="930">930</span>
-<span id="931">931</span>
-<span id="932">932</span>
-<span id="933">933</span>
-<span id="934">934</span>
-<span id="935">935</span>
-<span id="936">936</span>
-</pre><pre class="rust">
-<span class="doccomment">//! This file is responsible for translation from rustc tys (`TyAndLayout`) to spir-v types. It&#39;s</span>
+</pre><pre class="rust"><code><span class="doccomment">//! This file is responsible for translation from rustc tys (`TyAndLayout`) to spir-v types. It&#39;s</span>
 <span class="doccomment">//! surprisingly difficult.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::attr</span>::{<span class="ident">AggregatedSpirvAttributes</span>, <span class="ident">IntrinsicType</span>};
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::codegen_cx::CodegenCx</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::spirv_type::SpirvType</span>;
-<span class="kw">use</span> <span class="ident">rspirv::spirv</span>::{<span class="ident">Capability</span>, <span class="ident">StorageClass</span>, <span class="ident">Word</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::attr</span>::{<span class="ident">AggregatedSpirvAttributes</span>, <span class="ident">IntrinsicType</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::codegen_cx::CodegenCx</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::spirv_type::SpirvType</span>;
+<span class="kw">use</span> <span class="ident">rspirv::spirv</span>::{<span class="ident">StorageClass</span>, <span class="ident">Word</span>};
 <span class="kw">use</span> <span class="ident">rustc_data_structures::fx::FxHashMap</span>;
 <span class="kw">use</span> <span class="ident">rustc_errors::ErrorReported</span>;
+<span class="kw">use</span> <span class="ident">rustc_index::vec::Idx</span>;
 <span class="kw">use</span> <span class="ident">rustc_middle::bug</span>;
-<span class="kw">use</span> <span class="ident">rustc_middle::ty::layout</span>::{<span class="ident">FnAbiExt</span>, <span class="ident">TyAndLayout</span>};
+<span class="kw">use</span> <span class="ident">rustc_middle::ty::layout</span>::{<span class="ident">FnAbiOf</span>, <span class="ident">LayoutOf</span>, <span class="ident">TyAndLayout</span>};
 <span class="kw">use</span> <span class="ident">rustc_middle::ty::subst::SubstsRef</span>;
 <span class="kw">use</span> <span class="ident">rustc_middle::ty</span>::{
-    <span class="ident">Const</span>, <span class="ident">FloatTy</span>, <span class="ident">GeneratorSubsts</span>, <span class="ident">IntTy</span>, <span class="ident">ParamEnv</span>, <span class="ident">PolyFnSig</span>, <span class="ident">Ty</span>, <span class="ident">TyKind</span>, <span class="ident">TypeAndMut</span>, <span class="ident">UintTy</span>,
+    <span class="self">self</span>, <span class="ident">Const</span>, <span class="ident">FloatTy</span>, <span class="ident">GeneratorSubsts</span>, <span class="ident">IntTy</span>, <span class="ident">ParamEnv</span>, <span class="ident">PolyFnSig</span>, <span class="ident">Ty</span>, <span class="ident">TyKind</span>, <span class="ident">TypeAndMut</span>,
+    <span class="ident">UintTy</span>,
 };
 <span class="kw">use</span> <span class="ident">rustc_span::def_id::DefId</span>;
 <span class="kw">use</span> <span class="ident">rustc_span::Span</span>;
 <span class="kw">use</span> <span class="ident">rustc_span::DUMMY_SP</span>;
 <span class="kw">use</span> <span class="ident">rustc_target::abi::call</span>::{<span class="ident">CastTarget</span>, <span class="ident">FnAbi</span>, <span class="ident">PassMode</span>, <span class="ident">Reg</span>, <span class="ident">RegKind</span>};
-<span class="kw">use</span> <span class="ident">rustc_target::abi</span>::{
-    <span class="ident">Abi</span>, <span class="ident">Align</span>, <span class="ident">FieldsShape</span>, <span class="ident">LayoutOf</span>, <span class="ident">Primitive</span>, <span class="ident">Scalar</span>, <span class="ident">Size</span>, <span class="ident">TagEncoding</span>, <span class="ident">VariantIdx</span>, <span class="ident">Variants</span>,
-};
+<span class="kw">use</span> <span class="ident">rustc_target::abi</span>::{<span class="ident">Abi</span>, <span class="ident">Align</span>, <span class="ident">FieldsShape</span>, <span class="ident">Primitive</span>, <span class="ident">Scalar</span>, <span class="ident">Size</span>, <span class="ident">VariantIdx</span>, <span class="ident">Variants</span>};
 <span class="kw">use</span> <span class="ident">std::cell::RefCell</span>;
 <span class="kw">use</span> <span class="ident">std::collections::hash_map::Entry</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
 
 <span class="kw">use</span> <span class="ident">num_traits::cast::FromPrimitive</span>;
-<span class="kw">use</span> <span class="ident">rspirv::spirv</span>;
 
 <span class="doccomment">/// If a struct contains a pointer to itself, even indirectly, then doing a naiive recursive walk</span>
 <span class="doccomment">/// of the fields will result in an infinite loop. Because pointers are the only thing that are</span>
@@ -998,18 +957,11 @@
                     <span class="ident">cx</span>.<span class="ident">emit_global</span>()
                         .<span class="ident">type_forward_pointer</span>(<span class="ident">new_id</span>, <span class="ident">StorageClass::Generic</span>);
                     <span class="ident">entry</span>.<span class="ident">insert</span>(<span class="ident">PointeeDefState::DefiningWithForward</span>(<span class="ident">new_id</span>));
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">cx</span>.<span class="ident">builder</span>.<span class="ident">has_capability</span>(<span class="ident">Capability::Addresses</span>)
-                        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">cx</span>
-                            .<span class="ident">builder</span>
-                            .<span class="ident">has_capability</span>(<span class="ident">Capability::PhysicalStorageBufferAddresses</span>)
-                    {
-                        <span class="ident">cx</span>.<span class="ident">zombie_with_span</span>(
-                            <span class="ident">new_id</span>,
-                            <span class="ident">span</span>,
-                            <span class="string">&quot;OpTypeForwardPointer without OpCapability \
-                            Addresses or PhysicalStorageBufferAddresses&quot;</span>,
-                        );
-                    }
+                    <span class="ident">cx</span>.<span class="ident">zombie_with_span</span>(
+                        <span class="ident">new_id</span>,
+                        <span class="ident">span</span>,
+                        <span class="string">&quot;Cannot create self-referential types, even through pointers&quot;</span>,
+                    );
                     <span class="prelude-val">Some</span>(<span class="ident">new_id</span>)
                 }
                 <span class="comment">// State: This is the third or more time we&#39;ve seen this type, and we&#39;ve already emitted an</span>
@@ -1096,13 +1048,17 @@
     <span class="kw">fn</span> <span class="ident">spirv_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">span</span>: <span class="ident">Span</span>, <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Word</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">PointeeTy::Ty</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ty</span>.<span class="ident">spirv_type</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
-            <span class="ident">PointeeTy::Fn</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FnAbi::of_fn_ptr</span>(<span class="ident">cx</span>, <span class="ident">ty</span>, <span class="kw-2">&amp;</span>[]).<span class="ident">spirv_type</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
+            <span class="ident">PointeeTy::Fn</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>
+                .<span class="ident">fn_abi_of_fn_ptr</span>(<span class="ident">ty</span>, <span class="ident">ty::List::empty</span>())
+                .<span class="ident">spirv_type</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
         }
     }
     <span class="kw">fn</span> <span class="ident">spirv_type_immediate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">span</span>: <span class="ident">Span</span>, <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Word</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">PointeeTy::Ty</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ty</span>.<span class="ident">spirv_type_immediate</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
-            <span class="ident">PointeeTy::Fn</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FnAbi::of_fn_ptr</span>(<span class="ident">cx</span>, <span class="ident">ty</span>, <span class="kw-2">&amp;</span>[]).<span class="ident">spirv_type_immediate</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
+            <span class="ident">PointeeTy::Fn</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>
+                .<span class="ident">fn_abi_of_fn_ptr</span>(<span class="ident">ty</span>, <span class="ident">ty::List::empty</span>())
+                .<span class="ident">spirv_type_immediate</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
         }
     }
 }
@@ -1296,28 +1252,28 @@
             <span class="ident">field_names</span>: <span class="prelude-val">None</span>,
         }
         .<span class="ident">def_with_name</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">TyLayoutNameKey::from</span>(<span class="ident">ty</span>)),
-        <span class="ident">Abi::Scalar</span>(<span class="kw-2">ref</span> <span class="ident">scalar</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">scalar</span>, <span class="prelude-val">None</span>, <span class="ident">is_immediate</span>),
-        <span class="ident">Abi::ScalarPair</span>(<span class="kw-2">ref</span> <span class="ident">one</span>, <span class="kw-2">ref</span> <span class="ident">two</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="comment">// Note! Do not pass through is_immediate here - they&#39;re wrapped in a struct, hence, not immediate.</span>
-            <span class="kw">let</span> <span class="ident">one_spirv</span> <span class="op">=</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">one</span>, <span class="prelude-val">Some</span>(<span class="number">0</span>), <span class="bool-val">false</span>);
-            <span class="kw">let</span> <span class="ident">two_spirv</span> <span class="op">=</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">two</span>, <span class="prelude-val">Some</span>(<span class="number">1</span>), <span class="bool-val">false</span>);
+        <span class="ident">Abi::Scalar</span>(<span class="kw-2">ref</span> <span class="ident">scalar</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">scalar</span>, <span class="ident">Size::ZERO</span>, <span class="ident">is_immediate</span>),
+        <span class="ident">Abi::ScalarPair</span>(<span class="kw-2">ref</span> <span class="ident">a</span>, <span class="kw-2">ref</span> <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// Note: We can&#39;t use auto_struct_layout here because the spirv types here might be undefined due to</span>
             <span class="comment">// recursive pointer types.</span>
-            <span class="kw">let</span> <span class="ident">one_offset</span> <span class="op">=</span> <span class="ident">Size::ZERO</span>;
-            <span class="kw">let</span> <span class="ident">two_offset</span> <span class="op">=</span> <span class="ident">one</span>.<span class="ident">value</span>.<span class="ident">size</span>(<span class="ident">cx</span>).<span class="ident">align_to</span>(<span class="ident">two</span>.<span class="ident">value</span>.<span class="ident">align</span>(<span class="ident">cx</span>).<span class="ident">abi</span>);
+            <span class="kw">let</span> <span class="ident">a_offset</span> <span class="op">=</span> <span class="ident">Size::ZERO</span>;
+            <span class="kw">let</span> <span class="ident">b_offset</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">value</span>.<span class="ident">size</span>(<span class="ident">cx</span>).<span class="ident">align_to</span>(<span class="ident">b</span>.<span class="ident">value</span>.<span class="ident">align</span>(<span class="ident">cx</span>).<span class="ident">abi</span>);
+            <span class="comment">// Note! Do not pass through is_immediate here - they&#39;re wrapped in a struct, hence, not immediate.</span>
+            <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">a</span>, <span class="ident">a_offset</span>, <span class="bool-val">false</span>);
+            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">b</span>, <span class="ident">b_offset</span>, <span class="bool-val">false</span>);
             <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">is_unsized</span>() { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="ident">ty</span>.<span class="ident">size</span>) };
             <span class="ident">SpirvType::Adt</span> {
                 <span class="ident">def_id</span>: <span class="ident">def_id_for_spirv_type_adt</span>(<span class="ident">ty</span>),
                 <span class="ident">size</span>,
                 <span class="ident">align</span>: <span class="ident">ty</span>.<span class="ident">align</span>.<span class="ident">abi</span>,
-                <span class="ident">field_types</span>: <span class="macro">vec!</span>[<span class="ident">one_spirv</span>, <span class="ident">two_spirv</span>],
-                <span class="ident">field_offsets</span>: <span class="macro">vec!</span>[<span class="ident">one_offset</span>, <span class="ident">two_offset</span>],
+                <span class="ident">field_types</span>: <span class="macro">vec!</span>[<span class="ident">a</span>, <span class="ident">b</span>],
+                <span class="ident">field_offsets</span>: <span class="macro">vec!</span>[<span class="ident">a_offset</span>, <span class="ident">b_offset</span>],
                 <span class="ident">field_names</span>: <span class="prelude-val">None</span>,
             }
             .<span class="ident">def_with_name</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">TyLayoutNameKey::from</span>(<span class="ident">ty</span>))
         }
         <span class="ident">Abi::Vector</span> { <span class="kw-2">ref</span> <span class="ident">element</span>, <span class="ident">count</span> } <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">elem_spirv</span> <span class="op">=</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">element</span>, <span class="prelude-val">None</span>, <span class="bool-val">false</span>);
+            <span class="kw">let</span> <span class="ident">elem_spirv</span> <span class="op">=</span> <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">element</span>, <span class="ident">Size::ZERO</span>, <span class="bool-val">false</span>);
             <span class="ident">SpirvType::Vector</span> {
                 <span class="ident">element</span>: <span class="ident">elem_spirv</span>,
                 <span class="ident">count</span>: <span class="ident">count</span> <span class="kw">as</span> <span class="ident">u32</span>,
@@ -1337,11 +1293,16 @@
     <span class="ident">index</span>: <span class="ident">usize</span>,
     <span class="ident">is_immediate</span>: <span class="ident">bool</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Word</span> {
-    <span class="kw">let</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">ty</span>.<span class="ident">layout</span>.<span class="ident">abi</span> {
-        <span class="ident">Abi::ScalarPair</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> [<span class="ident">a</span>, <span class="ident">b</span>][<span class="ident">index</span>],
+    <span class="kw">let</span> [<span class="ident">a</span>, <span class="ident">b</span>] <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">ty</span>.<span class="ident">layout</span>.<span class="ident">abi</span> {
+        <span class="ident">Abi::ScalarPair</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> [<span class="ident">a</span>, <span class="ident">b</span>],
         <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">bug!</span>(<span class="string">&quot;scalar_pair_element_backend_type invalid abi: {:?}&quot;</span>, <span class="ident">other</span>),
     };
-    <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, <span class="ident">scalar</span>, <span class="prelude-val">Some</span>(<span class="ident">index</span>), <span class="ident">is_immediate</span>)
+    <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">index</span> {
+        <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Size::ZERO</span>,
+        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">a</span>.<span class="ident">value</span>.<span class="ident">size</span>(<span class="ident">cx</span>).<span class="ident">align_to</span>(<span class="ident">b</span>.<span class="ident">value</span>.<span class="ident">align</span>(<span class="ident">cx</span>).<span class="ident">abi</span>),
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+    };
+    <span class="ident">trans_scalar</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>, [<span class="ident">a</span>, <span class="ident">b</span>][<span class="ident">index</span>], <span class="ident">offset</span>, <span class="ident">is_immediate</span>)
 }
 
 <span class="doccomment">/// A &quot;scalar&quot; is a basic building block: bools, ints, floats, pointers. (i.e. not something complex like a struct)</span>
@@ -1356,7 +1317,7 @@
     <span class="ident">span</span>: <span class="ident">Span</span>,
     <span class="ident">ty</span>: <span class="ident">TyAndLayout</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
     <span class="ident">scalar</span>: <span class="kw-2">&amp;</span><span class="ident">Scalar</span>,
-    <span class="ident">index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+    <span class="ident">offset</span>: <span class="ident">Size</span>,
     <span class="ident">is_immediate</span>: <span class="ident">bool</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Word</span> {
     <span class="kw">if</span> <span class="ident">is_immediate</span> <span class="op">&amp;&amp;</span> <span class="ident">scalar</span>.<span class="ident">is_bool</span>() {
@@ -1364,16 +1325,13 @@
     }
 
     <span class="kw">match</span> <span class="ident">scalar</span>.<span class="ident">value</span> {
-        <span class="ident">Primitive::Int</span>(<span class="ident">width</span>, <span class="kw-2">mut</span> <span class="ident">signedness</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">cx</span>.<span class="ident">target</span>.<span class="ident">is_kernel</span>() {
-                <span class="ident">signedness</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            }
+        <span class="ident">Primitive::Int</span>(<span class="ident">width</span>, <span class="ident">signedness</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">SpirvType::Integer</span>(<span class="ident">width</span>.<span class="ident">size</span>().<span class="ident">bits</span>() <span class="kw">as</span> <span class="ident">u32</span>, <span class="ident">signedness</span>).<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>)
         }
         <span class="ident">Primitive::F32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpirvType::Float</span>(<span class="number">32</span>).<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
         <span class="ident">Primitive::F64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpirvType::Float</span>(<span class="number">64</span>).<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>),
         <span class="ident">Primitive::Pointer</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">pointee_ty</span> <span class="op">=</span> <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">ty</span>, <span class="ident">index</span>);
+            <span class="kw">let</span> <span class="ident">pointee_ty</span> <span class="op">=</span> <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">ty</span>, <span class="ident">offset</span>);
             <span class="comment">// Pointers can be recursive. So, record what we&#39;re currently translating, and if we&#39;re already translating</span>
             <span class="comment">// the same type, emit an OpTypeForwardPointer and use that ID.</span>
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">predefined_result</span>) <span class="op">=</span> <span class="ident">cx</span>
@@ -1404,113 +1362,72 @@
 <span class="comment">// If the above didn&#39;t make sense, please poke Ashley, it&#39;s probably easier to explain via conversation.</span>
 <span class="kw">fn</span> <span class="ident">dig_scalar_pointee</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>(
     <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-    <span class="ident">ty</span>: <span class="ident">TyAndLayout</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-    <span class="ident">index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+    <span class="ident">layout</span>: <span class="ident">TyAndLayout</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
+    <span class="ident">offset</span>: <span class="ident">Size</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PointeeTy</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">ty</span>.<span class="ident">ty</span>.<span class="ident">kind</span>() {
-        <span class="ident">TyKind::Ref</span>(<span class="kw">_</span>, <span class="ident">elem_ty</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">TyKind::RawPtr</span>(<span class="ident">TypeAndMut</span> { <span class="ident">ty</span>: <span class="ident">elem_ty</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">elem</span> <span class="op">=</span> <span class="ident">cx</span>.<span class="ident">layout_of</span>(<span class="ident">elem_ty</span>);
-            <span class="kw">match</span> <span class="ident">index</span> {
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">PointeeTy::Ty</span>(<span class="ident">elem</span>),
-                <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">if</span> <span class="ident">elem</span>.<span class="ident">is_unsized</span>() {
-                        <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">ty</span>.<span class="ident">field</span>(<span class="ident">cx</span>, <span class="ident">index</span>), <span class="prelude-val">None</span>)
-                    } <span class="kw">else</span> {
-                        <span class="comment">// This can sometimes happen in weird cases when going through the Adt case below - an ABI</span>
-                        <span class="comment">// of ScalarPair could be deduced, but it&#39;s actually e.g. a sized pointer followed by some other</span>
-                        <span class="comment">// completely unrelated type, not a wide pointer. So, translate this as a single scalar, one</span>
-                        <span class="comment">// component of that ScalarPair.</span>
-                        <span class="ident">PointeeTy::Ty</span>(<span class="ident">elem</span>)
-                    }
-                }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FieldsShape::Primitive</span> <span class="op">=</span> <span class="ident">layout</span>.<span class="ident">fields</span> {
+        <span class="macro">assert_eq!</span>(<span class="ident">offset</span>, <span class="ident">Size::ZERO</span>);
+        <span class="kw">let</span> <span class="ident">pointee</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">layout</span>.<span class="ident">ty</span>.<span class="ident">kind</span>() {
+            <span class="ident">TyKind::Ref</span>(<span class="kw">_</span>, <span class="ident">pointee_ty</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">TyKind::RawPtr</span>(<span class="ident">TypeAndMut</span> { <span class="ident">ty</span>: <span class="ident">pointee_ty</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">PointeeTy::Ty</span>(<span class="ident">cx</span>.<span class="ident">layout_of</span>(<span class="ident">pointee_ty</span>))
             }
-        }
-        <span class="ident">TyKind::FnPtr</span>(<span class="ident">sig</span>) <span class="kw">if</span> <span class="ident">index</span>.<span class="ident">is_none</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="ident">PointeeTy::Fn</span>(<span class="ident">sig</span>),
-        <span class="ident">TyKind::Adt</span>(<span class="ident">def</span>, <span class="kw">_</span>) <span class="kw">if</span> <span class="ident">def</span>.<span class="ident">is_box</span>() <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">ptr_ty</span> <span class="op">=</span> <span class="ident">cx</span>.<span class="ident">layout_of</span>(<span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">mk_mut_ptr</span>(<span class="ident">ty</span>.<span class="ident">ty</span>.<span class="ident">boxed_ty</span>()));
-            <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">ptr_ty</span>, <span class="ident">index</span>)
-        }
-        <span class="ident">TyKind::Tuple</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">TyKind::Adt</span>(..) <span class="op">|</span> <span class="ident">TyKind::Closure</span>(..) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="ident">dig_scalar_pointee_adt</span>(<span class="ident">cx</span>, <span class="ident">ty</span>, <span class="ident">index</span>)
-        }
-        <span class="kw-2">ref</span> <span class="ident">kind</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">fatal</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
-            <span class="string">&quot;TODO: Unimplemented Primitive::Pointer TyKind index={:?} ({:#?}):\n{:#?}&quot;</span>,
-            <span class="ident">index</span>, <span class="ident">kind</span>, <span class="ident">ty</span>
-        )),
+            <span class="ident">TyKind::FnPtr</span>(<span class="ident">sig</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">PointeeTy::Fn</span>(<span class="ident">sig</span>),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">bug!</span>(<span class="string">&quot;Pointer is not `&amp;T`, `*T` or `fn` pointer: {:#?}&quot;</span>, <span class="ident">layout</span>),
+        };
+        <span class="kw">return</span> <span class="ident">pointee</span>;
     }
-}
 
-<span class="kw">fn</span> <span class="ident">dig_scalar_pointee_adt</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>(
-    <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-    <span class="ident">ty</span>: <span class="ident">TyAndLayout</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-    <span class="ident">index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PointeeTy</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">ty</span>.<span class="ident">variants</span> {
-        <span class="comment">// If it&#39;s a Variants::Multiple, then we want to emit the type of the dataful variant, not the type of the</span>
-        <span class="comment">// discriminant. This is because the discriminant can e.g. have type *mut(), whereas we want the full underlying</span>
-        <span class="comment">// type, only available in the dataful variant.</span>
-        <span class="ident">Variants::Multiple</span> {
-            <span class="ident">tag_encoding</span>,
-            <span class="ident">tag_field</span>,
-            <span class="ident">variants</span>,
-            ..
-        } <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">tag_encoding</span> {
-                <span class="ident">TagEncoding::Direct</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">fatal</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
-                    <span class="string">&quot;dig_scalar_pointee_adt Variants::Multiple TagEncoding::Direct makes no sense: {:#?}&quot;</span>,
-                    <span class="ident">ty</span>
-                )),
-                <span class="ident">TagEncoding::Niche</span> { <span class="ident">dataful_variant</span>, .. } <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="comment">// This *should* be something like Option&lt;&amp;T&gt;: a very simple enum.</span>
-                    <span class="comment">// TODO: This might not be, if it&#39;s a scalar pair?</span>
-                    <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">ty</span>.<span class="ident">fields</span>.<span class="ident">count</span>());
-                    <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">variants</span>[<span class="ident">dataful_variant</span>].<span class="ident">fields</span>.<span class="ident">count</span>());
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TyKind::Adt</span>(<span class="ident">adt</span>, <span class="ident">substs</span>) <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">ty</span>.<span class="ident">kind</span>() {
-                        <span class="macro">assert_eq!</span>(<span class="number">1</span>, <span class="ident">adt</span>.<span class="ident">variants</span>[<span class="ident">dataful_variant</span>].<span class="ident">fields</span>.<span class="ident">len</span>());
-                        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="kw-2">*</span><span class="ident">tag_field</span>);
-                        <span class="kw">let</span> <span class="ident">field_ty</span> <span class="op">=</span> <span class="ident">adt</span>.<span class="ident">variants</span>[<span class="ident">dataful_variant</span>].<span class="ident">fields</span>[<span class="number">0</span>].<span class="ident">ty</span>(<span class="ident">cx</span>.<span class="ident">tcx</span>, <span class="ident">substs</span>);
-                        <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">cx</span>.<span class="ident">layout_of</span>(<span class="ident">field_ty</span>), <span class="ident">index</span>)
-                    } <span class="kw">else</span> {
-                        <span class="macro">bug!</span>(<span class="string">&quot;Variants::Multiple not TyKind::Adt: {:#?}&quot;</span>, <span class="ident">ty</span>)
-                    }
-                },
-            }
+    <span class="kw">let</span> <span class="ident">all_fields</span> <span class="op">=</span> (<span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">layout</span>.<span class="ident">variants</span> {
+        <span class="ident">Variants::Multiple</span> { <span class="ident">variants</span>, .. } <span class="op">=</span><span class="op">&gt;</span> <span class="number">0</span>..<span class="ident">variants</span>.<span class="ident">len</span>(),
+        <span class="ident">Variants::Single</span> { <span class="ident">index</span> } <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">index</span>.<span class="ident">as_usize</span>();
+            <span class="ident">i</span>..<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>
         }
-        <span class="ident">Variants::Single</span> { .. } <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">fields</span> <span class="op">=</span> <span class="ident">ty</span>
-                .<span class="ident">fields</span>
-                .<span class="ident">index_by_increasing_offset</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">ty</span>.<span class="ident">field</span>(<span class="ident">cx</span>, <span class="ident">f</span>))
-                .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="op">!</span><span class="ident">f</span>.<span class="ident">is_zst</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-            <span class="kw">match</span> <span class="ident">index</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">fields</span>.<span class="ident">len</span>() {
-                    <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">fields</span>[<span class="number">0</span>], <span class="prelude-val">Some</span>(<span class="ident">index</span>)),
-                    <span class="comment">// This case right here is the cause of the comment handling TyKind::Ref.</span>
-                    <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">fields</span>[<span class="ident">index</span>], <span class="prelude-val">None</span>),
-                    <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">fatal</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
-                        <span class="string">&quot;Unable to dig scalar pair pointer type: fields length {}&quot;</span>,
-                        <span class="ident">other</span>
-                    )),
-                },
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">fields</span>.<span class="ident">len</span>() {
-                    <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">fields</span>[<span class="number">0</span>], <span class="prelude-val">None</span>),
-                    <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">fatal</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
-                        <span class="string">&quot;Unable to dig scalar pointer type: fields length {}&quot;</span>,
-                        <span class="ident">other</span>
-                    )),
-                },
+    })
+    .<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">variant_idx</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">variant</span> <span class="op">=</span> <span class="ident">layout</span>.<span class="ident">for_variant</span>(<span class="ident">cx</span>, <span class="ident">VariantIdx::new</span>(<span class="ident">variant_idx</span>));
+        (<span class="number">0</span>..<span class="ident">variant</span>.<span class="ident">fields</span>.<span class="ident">count</span>()).<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">field_idx</span><span class="op">|</span> {
+            (
+                <span class="ident">variant</span>.<span class="ident">field</span>(<span class="ident">cx</span>, <span class="ident">field_idx</span>),
+                <span class="ident">variant</span>.<span class="ident">fields</span>.<span class="ident">offset</span>(<span class="ident">field_idx</span>),
+            )
+        })
+    });
+
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pointee</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+    <span class="kw">for</span> (<span class="ident">field</span>, <span class="ident">field_offset</span>) <span class="kw">in</span> <span class="ident">all_fields</span> {
+        <span class="kw">if</span> <span class="ident">field</span>.<span class="ident">is_zst</span>() {
+            <span class="kw">continue</span>;
+        }
+        <span class="kw">if</span> (<span class="ident">field_offset</span>..<span class="ident">field_offset</span> <span class="op">+</span> <span class="ident">field</span>.<span class="ident">size</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">offset</span>) {
+            <span class="kw">let</span> <span class="ident">new_pointee</span> <span class="op">=</span> <span class="ident">dig_scalar_pointee</span>(<span class="ident">cx</span>, <span class="ident">field</span>, <span class="ident">offset</span> <span class="op">-</span> <span class="ident">field_offset</span>);
+            <span class="kw">match</span> <span class="ident">pointee</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">old_pointee</span>) <span class="kw">if</span> <span class="ident">old_pointee</span> <span class="op">!</span><span class="op">=</span> <span class="ident">new_pointee</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">fatal</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
+                        <span class="string">&quot;dig_scalar_pointee: unsupported Pointer with different \
+                         pointee types ({:?} vs {:?}) at offset {:?} in {:#?}&quot;</span>,
+                        <span class="ident">old_pointee</span>, <span class="ident">new_pointee</span>, <span class="ident">offset</span>, <span class="ident">layout</span>
+                    ));
+                }
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">pointee</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">new_pointee</span>),
             }
         }
     }
+    <span class="ident">pointee</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="macro">bug!</span>(
+            <span class="string">&quot;field containing Pointer scalar at offset {:?} not found in {:#?}&quot;</span>,
+            <span class="ident">offset</span>,
+            <span class="ident">layout</span>
+        )
+    })
 }
 
 <span class="kw">fn</span> <span class="ident">trans_aggregate</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>(<span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>, <span class="ident">span</span>: <span class="ident">Span</span>, <span class="ident">ty</span>: <span class="ident">TyAndLayout</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Word</span> {
     <span class="kw">match</span> <span class="ident">ty</span>.<span class="ident">fields</span> {
-        <span class="ident">FieldsShape::Primitive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">fatal</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
-            <span class="string">&quot;FieldsShape::Primitive not supported yet in trans_type: {:?}&quot;</span>,
+        <span class="ident">FieldsShape::Primitive</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">bug!</span>(
+            <span class="string">&quot;trans_aggregate called for FieldsShape::Primitive layout {:#?}&quot;</span>,
             <span class="ident">ty</span>
-        )),
+        ),
         <span class="ident">FieldsShape::Union</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="macro">assert_ne!</span>(<span class="ident">ty</span>.<span class="ident">size</span>.<span class="ident">bytes</span>(), <span class="number">0</span>, <span class="string">&quot;{:#?}&quot;</span>, <span class="ident">ty</span>);
             <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">ty</span>.<span class="ident">is_unsized</span>(), <span class="string">&quot;{:#?}&quot;</span>, <span class="ident">ty</span>);
@@ -1592,18 +1509,6 @@
 
 <span class="comment">// see struct_llfields in librustc_codegen_llvm for implementation hints</span>
 <span class="kw">fn</span> <span class="ident">trans_struct</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>(<span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>, <span class="ident">span</span>: <span class="ident">Span</span>, <span class="ident">ty</span>: <span class="ident">TyAndLayout</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Word</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TyKind::Foreign</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">ty</span>.<span class="ident">kind</span>() {
-        <span class="comment">// &quot;An unsized FFI type that is opaque to Rust&quot;, `extern type A;` (currently unstable)</span>
-        <span class="kw">if</span> <span class="ident">cx</span>.<span class="ident">target</span>.<span class="ident">is_kernel</span>() {
-            <span class="comment">// TODO: This should use the name of the struct as the name. However, names are not stable across crates,</span>
-            <span class="comment">// e.g. core::fmt::Opaque in one crate and fmt::Opaque in core.</span>
-            <span class="kw">return</span> <span class="ident">SpirvType::Opaque</span> {
-                <span class="ident">name</span>: <span class="string">&quot;&quot;</span>.<span class="ident">to_string</span>(),
-            }
-            .<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>);
-        }
-        <span class="comment">// otherwise fall back</span>
-    };
     <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">is_unsized</span>() { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="ident">ty</span>.<span class="ident">size</span>) };
     <span class="kw">let</span> <span class="ident">align</span> <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">align</span>.<span class="ident">abi</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">field_types</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
@@ -1700,38 +1605,6 @@
     <span class="ident">intrinsic_type_attr</span>: <span class="ident">IntrinsicType</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Word</span>, <span class="ident">ErrorReported</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">intrinsic_type_attr</span> {
-        <span class="ident">IntrinsicType::ImageType</span> {
-            <span class="ident">dim</span>,
-            <span class="ident">depth</span>,
-            <span class="ident">arrayed</span>,
-            <span class="ident">multisampled</span>,
-            <span class="ident">sampled</span>,
-            <span class="ident">image_format</span>,
-            <span class="ident">access_qualifier</span>,
-        } <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="comment">// see SpirvType::sizeof</span>
-            <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">size</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Size::from_bytes</span>(<span class="number">4</span>) {
-                <span class="ident">cx</span>.<span class="ident">tcx</span>
-                    .<span class="ident">sess</span>
-                    .<span class="ident">err</span>(<span class="string">&quot;#[spirv(image_type)] type must have size 4&quot;</span>);
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>);
-            }
-            <span class="comment">// Hardcode to float for now</span>
-            <span class="kw">let</span> <span class="ident">sampled_type</span> <span class="op">=</span> <span class="ident">SpirvType::Float</span>(<span class="number">32</span>).<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>);
-
-            <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">SpirvType::Image</span> {
-                <span class="ident">sampled_type</span>,
-                <span class="ident">dim</span>,
-                <span class="ident">depth</span>,
-                <span class="ident">arrayed</span>,
-                <span class="ident">multisampled</span>,
-                <span class="ident">sampled</span>,
-                <span class="ident">image_format</span>,
-                <span class="ident">access_qualifier</span>,
-            };
-
-            <span class="prelude-val">Ok</span>(<span class="ident">ty</span>.<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>))
-        }
         <span class="ident">IntrinsicType::GenericImageType</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="comment">// see SpirvType::sizeof</span>
             <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">size</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Size::from_bytes</span>(<span class="number">4</span>) {
@@ -1741,17 +1614,17 @@
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>);
             }
 
-            <span class="kw">fn</span> <span class="ident">type_from_variant_discriminant</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span>, <span class="ident">P</span>: <span class="ident">FromPrimitive</span><span class="op">&gt;</span>(
-                <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-                <span class="ident">const_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;tcx</span> <span class="ident">Const</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
-            ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">P</span> {
-                <span class="kw">let</span> <span class="ident">adt_def</span> <span class="op">=</span> <span class="ident">const_</span>.<span class="ident">ty</span>.<span class="ident">ty_adt_def</span>().<span class="ident">unwrap</span>();
-                <span class="macro">assert!</span>(<span class="ident">adt_def</span>.<span class="ident">is_enum</span>());
-                <span class="kw">let</span> <span class="ident">destructured</span> <span class="op">=</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">destructure_const</span>(<span class="ident">ParamEnv::reveal_all</span>().<span class="ident">and</span>(<span class="ident">const_</span>));
-                <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">destructured</span>.<span class="ident">variant</span>.<span class="ident">unwrap</span>();
-                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">const_</span>.<span class="ident">ty</span>.<span class="ident">discriminant_for_variant</span>(<span class="ident">cx</span>.<span class="ident">tcx</span>, <span class="ident">idx</span>).<span class="ident">unwrap</span>().<span class="ident">val</span> <span class="kw">as</span> <span class="ident">u64</span>;
-                <span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="ident">::from_u64</span>(<span class="ident">value</span>).<span class="ident">unwrap</span>()
-            }
+            <span class="comment">// fn type_from_variant_discriminant&lt;&#39;tcx, P: FromPrimitive&gt;(</span>
+            <span class="comment">//     cx: &amp;CodegenCx&lt;&#39;tcx&gt;,</span>
+            <span class="comment">//     const_: &amp;&#39;tcx Const&lt;&#39;tcx&gt;,</span>
+            <span class="comment">// ) -&gt; P {</span>
+            <span class="comment">//     let adt_def = const_.ty.ty_adt_def().unwrap();</span>
+            <span class="comment">//     assert!(adt_def.is_enum());</span>
+            <span class="comment">//     let destructured = cx.tcx.destructure_const(ParamEnv::reveal_all().and(const_));</span>
+            <span class="comment">//     let idx = destructured.variant.unwrap();</span>
+            <span class="comment">//     let value = const_.ty.discriminant_for_variant(cx.tcx, idx).unwrap().val as u64;</span>
+            <span class="comment">//     &lt;_&gt;::from_u64(value).unwrap()</span>
+            <span class="comment">// }</span>
 
             <span class="kw">let</span> <span class="ident">sampled_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">substs</span>.<span class="ident">type_at</span>(<span class="number">0</span>).<span class="ident">kind</span>() {
                 <span class="ident">TyKind::Int</span>(<span class="ident">int</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">int</span> {
@@ -1786,25 +1659,37 @@
                 }
             };
 
-            <span class="kw">let</span> <span class="ident">dim</span>: <span class="ident">spirv::Dim</span> <span class="op">=</span> <span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">1</span>));
-            <span class="kw">let</span> <span class="ident">depth</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">2</span>));
-            <span class="kw">let</span> <span class="ident">arrayed</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">3</span>));
-            <span class="kw">let</span> <span class="ident">multisampled</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">4</span>));
-            <span class="kw">let</span> <span class="ident">sampled</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">5</span>));
-            <span class="kw">let</span> <span class="ident">image_format</span>: <span class="ident">spirv::ImageFormat</span> <span class="op">=</span>
-                <span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">6</span>));
+            <span class="comment">// let dim: spirv::Dim = type_from_variant_discriminant(cx, substs.const_at(1));</span>
+            <span class="comment">// let depth: u32 = type_from_variant_discriminant(cx, substs.const_at(2));</span>
+            <span class="comment">// let arrayed: u32 = type_from_variant_discriminant(cx, substs.const_at(3));</span>
+            <span class="comment">// let multisampled: u32 = type_from_variant_discriminant(cx, substs.const_at(4));</span>
+            <span class="comment">// let sampled: u32 = type_from_variant_discriminant(cx, substs.const_at(5));</span>
+            <span class="comment">// let image_format: spirv::ImageFormat =</span>
+            <span class="comment">//     type_from_variant_discriminant(cx, substs.const_at(6));</span>
 
-            <span class="kw">let</span> <span class="ident">access_qualifier</span> <span class="op">=</span> {
-                <span class="kw">let</span> <span class="ident">option</span> <span class="op">=</span> <span class="ident">cx</span>
-                    .<span class="ident">tcx</span>
-                    .<span class="ident">destructure_const</span>(<span class="ident">ParamEnv::reveal_all</span>().<span class="ident">and</span>(<span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">7</span>)));
-
-                <span class="kw">match</span> <span class="ident">option</span>.<span class="ident">variant</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">i</span>.<span class="ident">as_u32</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>) {
-                    <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
-                    <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">type_from_variant_discriminant</span>(<span class="ident">cx</span>, <span class="ident">option</span>.<span class="ident">fields</span>[<span class="number">0</span>])),
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+            <span class="kw">fn</span> <span class="ident">const_int_value</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span>, <span class="ident">P</span>: <span class="ident">FromPrimitive</span><span class="op">&gt;</span>(
+                <span class="ident">cx</span>: <span class="kw-2">&amp;</span><span class="ident">CodegenCx</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
+                <span class="ident">const_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;tcx</span> <span class="ident">Const</span><span class="op">&lt;</span><span class="lifetime">&#39;tcx</span><span class="op">&gt;</span>,
+            ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">ErrorReported</span><span class="op">&gt;</span> {
+                <span class="macro">assert!</span>(<span class="ident">const_</span>.<span class="ident">ty</span>.<span class="ident">is_integral</span>());
+                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">const_</span>.<span class="ident">eval_bits</span>(<span class="ident">cx</span>.<span class="ident">tcx</span>, <span class="ident">ParamEnv::reveal_all</span>(), <span class="ident">const_</span>.<span class="ident">ty</span>);
+                <span class="kw">match</span> <span class="ident">P::from_u128</span>(<span class="ident">value</span>) {
+                    <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">v</span>),
+                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">cx</span>.<span class="ident">tcx</span>
+                            .<span class="ident">sess</span>
+                            .<span class="ident">err</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Invalid value for Image const generic: {}&quot;</span>, <span class="ident">value</span>));
+                        <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>)
+                    }
                 }
-            };
+            }
+
+            <span class="kw">let</span> <span class="ident">dim</span> <span class="op">=</span> <span class="ident">const_int_value</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">1</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">depth</span> <span class="op">=</span> <span class="ident">const_int_value</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">2</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">arrayed</span> <span class="op">=</span> <span class="ident">const_int_value</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">3</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">multisampled</span> <span class="op">=</span> <span class="ident">const_int_value</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">4</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">sampled</span> <span class="op">=</span> <span class="ident">const_int_value</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">5</span>))<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">image_format</span> <span class="op">=</span> <span class="ident">const_int_value</span>(<span class="ident">cx</span>, <span class="ident">substs</span>.<span class="ident">const_at</span>(<span class="number">6</span>))<span class="question-mark">?</span>;
 
             <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">SpirvType::Image</span> {
                 <span class="ident">sampled_type</span>,
@@ -1814,7 +1699,6 @@
                 <span class="ident">multisampled</span>,
                 <span class="ident">sampled</span>,
                 <span class="ident">image_format</span>,
-                <span class="ident">access_qualifier</span>,
             };
             <span class="prelude-val">Ok</span>(<span class="ident">ty</span>.<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>))
         }
@@ -1872,8 +1756,49 @@
                 <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>)
             }
         }
+        <span class="ident">IntrinsicType::Matrix</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">def_id_for_spirv_type_adt</span>(<span class="ident">ty</span>)
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">did</span><span class="op">|</span> <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">def_span</span>(<span class="ident">did</span>))
+                .<span class="ident">expect</span>(<span class="string">&quot;#[spirv(matrix)] must be added to a type which has DefId&quot;</span>);
+
+            <span class="kw">let</span> <span class="ident">field_types</span> <span class="op">=</span> (<span class="number">0</span>..<span class="ident">ty</span>.<span class="ident">fields</span>.<span class="ident">count</span>())
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">trans_type_impl</span>(<span class="ident">cx</span>, <span class="ident">span</span>, <span class="ident">ty</span>.<span class="ident">field</span>(<span class="ident">cx</span>, <span class="ident">i</span>), <span class="bool-val">false</span>))
+                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+            <span class="kw">if</span> <span class="ident">field_types</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="number">2</span> {
+                <span class="ident">cx</span>.<span class="ident">tcx</span>
+                    .<span class="ident">sess</span>
+                    .<span class="ident">span_err</span>(<span class="ident">span</span>, <span class="string">&quot;#[spirv(matrix)] type must have at least two fields&quot;</span>);
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>);
+            }
+            <span class="kw">let</span> <span class="ident">elem_type</span> <span class="op">=</span> <span class="ident">field_types</span>[<span class="number">0</span>];
+            <span class="kw">if</span> <span class="op">!</span><span class="ident">field_types</span>.<span class="ident">iter</span>().<span class="ident">all</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">ty</span><span class="op">|</span> <span class="ident">ty</span> <span class="op">=</span><span class="op">=</span> <span class="ident">elem_type</span>) {
+                <span class="ident">cx</span>.<span class="ident">tcx</span>.<span class="ident">sess</span>.<span class="ident">span_err</span>(
+                    <span class="ident">span</span>,
+                    <span class="string">&quot;#[spirv(matrix)] type fields must all be the same type&quot;</span>,
+                );
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>);
+            }
+            <span class="kw">match</span> <span class="ident">cx</span>.<span class="ident">lookup_type</span>(<span class="ident">elem_type</span>) {
+                <span class="ident">SpirvType::Vector</span> { .. } <span class="op">=</span><span class="op">&gt;</span> (),
+                <span class="ident">ty</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">cx</span>.<span class="ident">tcx</span>
+                        .<span class="ident">sess</span>
+                        .<span class="ident">struct_span_err</span>(<span class="ident">span</span>, <span class="string">&quot;#[spirv(matrix)] type fields must all be vectors&quot;</span>)
+                        .<span class="ident">note</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;field type is {}&quot;</span>, <span class="ident">ty</span>.<span class="ident">debug</span>(<span class="ident">elem_type</span>, <span class="ident">cx</span>)))
+                        .<span class="ident">emit</span>();
+                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ErrorReported</span>);
+                }
+            }
+
+            <span class="prelude-val">Ok</span>(<span class="ident">SpirvType::Matrix</span> {
+                <span class="ident">element</span>: <span class="ident">elem_type</span>,
+                <span class="ident">count</span>: <span class="ident">field_types</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>,
+            }
+            .<span class="ident">def</span>(<span class="ident">span</span>, <span class="ident">cx</span>))
+        }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="rustc_codegen_spirv" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>
+    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</body></html>

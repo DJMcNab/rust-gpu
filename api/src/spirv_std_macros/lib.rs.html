@@ -1,7 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates/spirv-std/macros/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../spirv_std_macros/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;spirv-std&#x2F;macros&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../spirv_std_macros/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -328,31 +325,64 @@
 <span id="325">325</span>
 <span id="326">326</span>
 <span id="327">327</span>
-</pre><pre class="rust">
-<span class="comment">// BEGIN - Embark standard lints v0.3</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+</pre><pre class="rust"><code><span class="comment">// BEGIN - Embark standard lints v0.4</span>
 <span class="comment">// do not change or add/remove here, but one can add exceptions after this section</span>
 <span class="comment">// for more info see: &lt;https://github.com/EmbarkStudios/rust-ecosystem/issues/59&gt;</span>
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">unsafe_code</span>)]</span>
 <span class="attribute">#![<span class="ident">warn</span>(
     <span class="ident">clippy::all</span>,
     <span class="ident">clippy::await_holding_lock</span>,
+    <span class="ident">clippy::char_lit_as_u8</span>,
+    <span class="ident">clippy::checked_conversions</span>,
     <span class="ident">clippy::dbg_macro</span>,
     <span class="ident">clippy::debug_assert_with_mut_call</span>,
     <span class="ident">clippy::doc_markdown</span>,
     <span class="ident">clippy::empty_enum</span>,
     <span class="ident">clippy::enum_glob_use</span>,
     <span class="ident">clippy::exit</span>,
+    <span class="ident">clippy::expl_impl_clone_on_copy</span>,
+    <span class="ident">clippy::explicit_deref_methods</span>,
     <span class="ident">clippy::explicit_into_iter_loop</span>,
+    <span class="ident">clippy::fallible_impl_from</span>,
     <span class="ident">clippy::filter_map_next</span>,
+    <span class="ident">clippy::float_cmp_const</span>,
     <span class="ident">clippy::fn_params_excessive_bools</span>,
     <span class="ident">clippy::if_let_mutex</span>,
+    <span class="ident">clippy::implicit_clone</span>,
     <span class="ident">clippy::imprecise_flops</span>,
     <span class="ident">clippy::inefficient_to_string</span>,
+    <span class="ident">clippy::invalid_upcast_comparisons</span>,
     <span class="ident">clippy::large_types_passed_by_value</span>,
     <span class="ident">clippy::let_unit_value</span>,
     <span class="ident">clippy::linkedlist</span>,
     <span class="ident">clippy::lossy_float_literal</span>,
     <span class="ident">clippy::macro_use_imports</span>,
+    <span class="ident">clippy::manual_ok_or</span>,
     <span class="ident">clippy::map_err_ignore</span>,
     <span class="ident">clippy::map_flatten</span>,
     <span class="ident">clippy::map_unwrap_or</span>,
@@ -361,26 +391,34 @@
     <span class="ident">clippy::match_wildcard_for_single_variants</span>,
     <span class="ident">clippy::mem_forget</span>,
     <span class="ident">clippy::mismatched_target_os</span>,
+    <span class="ident">clippy::mut_mut</span>,
+    <span class="ident">clippy::mutex_integer</span>,
     <span class="ident">clippy::needless_borrow</span>,
     <span class="ident">clippy::needless_continue</span>,
     <span class="ident">clippy::option_option</span>,
-    <span class="ident">clippy::pub_enum_variant_names</span>,
+    <span class="ident">clippy::path_buf_push_overwrite</span>,
+    <span class="ident">clippy::ptr_as_ptr</span>,
     <span class="ident">clippy::ref_option_ref</span>,
     <span class="ident">clippy::rest_pat_in_fully_bound_structs</span>,
+    <span class="ident">clippy::same_functions_in_if_condition</span>,
+    <span class="ident">clippy::semicolon_if_nothing_returned</span>,
     <span class="ident">clippy::string_add_assign</span>,
     <span class="ident">clippy::string_add</span>,
+    <span class="ident">clippy::string_lit_as_bytes</span>,
     <span class="ident">clippy::string_to_string</span>,
-    <span class="ident">clippy::suboptimal_flops</span>,
     <span class="ident">clippy::todo</span>,
+    <span class="ident">clippy::trait_duplication_in_bounds</span>,
     <span class="ident">clippy::unimplemented</span>,
     <span class="ident">clippy::unnested_or_patterns</span>,
     <span class="ident">clippy::unused_self</span>,
+    <span class="ident">clippy::useless_transmute</span>,
     <span class="ident">clippy::verbose_file_reads</span>,
+    <span class="ident">clippy::zero_sized_map_values</span>,
     <span class="ident">future_incompatible</span>,
     <span class="ident">nonstandard_style</span>,
     <span class="ident">rust_2018_idioms</span>
 )]</span>
-<span class="comment">// END - Embark standard lints v0.3</span>
+<span class="comment">// END - Embark standard lints v0.4</span>
 <span class="comment">// crate-specific exceptions:</span>
 <span class="comment">// `or_patterns` is not stable yet.</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::unnested_or_patterns</span>)]</span>
@@ -394,14 +432,15 @@
 
 <span class="kw">use</span> <span class="ident">quote::ToTokens</span>;
 
-<span class="doccomment">/// A macro for creating SPIR-V `OpTypeImage` types.</span>
+<span class="doccomment">/// A macro for creating SPIR-V `OpTypeImage` types. Always produces a</span>
+<span class="doccomment">/// `spirv_std::image::Image&lt;...&gt;` type.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The grammar for the macro is as follows:</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// ```no_compile</span>
+<span class="doccomment">/// ```rust,ignore</span>
 <span class="doccomment">/// Image!(</span>
 <span class="doccomment">///     &lt;dimensionality&gt;,</span>
-<span class="doccomment">///     &lt;type|format&gt;,</span>
+<span class="doccomment">///     &lt;type=...|format=...&gt;,</span>
 <span class="doccomment">///     [sampled[=&lt;true|false&gt;],]</span>
 <span class="doccomment">///     [multisampled[=&lt;true|false&gt;],]</span>
 <span class="doccomment">///     [arrayed[=&lt;true|false&gt;],]</span>
@@ -409,31 +448,38 @@
 <span class="doccomment">/// )</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// `=true` can be omitted as shorthand - e.g. `sampled` is short for `sampled=true`.</span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// A basic example looks like this:</span>
-<span class="doccomment">/// ```no_compile</span>
+<span class="doccomment">/// ```rust,ignore</span>
 <span class="doccomment">/// #[spirv(vertex)]</span>
 <span class="doccomment">/// fn main(#[spirv(descriptor_set = 0, binding = 0)] image: &amp;Image!(2D, type=f32, sampled)) {}</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ## Arguments</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// - `dimensionality` — Dimensionality of an image. Accepted values: `1D`,</span>
-<span class="doccomment">///   `2D`, `3D`, `rect`, `cube`, `subpass`.</span>
+<span class="doccomment">/// - `dimensionality` — Dimensionality of an image.</span>
+<span class="doccomment">///    Accepted values: `1D`, `2D`, `3D`, `rect`, `cube`, `subpass`.</span>
 <span class="doccomment">/// - `type` — The sampled type of an image, mutually exclusive with `format`,</span>
-<span class="doccomment">///   when set the image format is unknown. Accepted values: `f32`, `f64`,</span>
-<span class="doccomment">///   `u8`, `u16`, `u32`, `u64`, `i8`, `i16`, `i32`, `i64`.</span>
+<span class="doccomment">///    when set the image format is unknown.</span>
+<span class="doccomment">///    Accepted values: `f32`, `f64`, `u8`, `u16`, `u32`, `u64`, `i8`, `i16`, `i32`, `i64`.</span>
 <span class="doccomment">/// - `format` — The image format of the image, mutually exclusive with `type`.</span>
-<span class="doccomment">///   Accepted values: Camel case versions of [`ImageFormat`].</span>
-<span class="doccomment">/// - `sampled` — Whether it is known that the image will be used with a sampler</span>
-<span class="doccomment">///   at compile time. Accepted values: `true` or `false`. Default: `unknown`.</span>
-<span class="doccomment">/// - `multisampled` — Whether the image contains multisampled content. Accepted</span>
-<span class="doccomment">///    values: `true` or `false`. Default: `false`.</span>
-<span class="doccomment">/// - `arrayed` — Whether the image contains arrayed content. Accepted</span>
-<span class="doccomment">///    values: `true` or `false`. Default: `false`.</span>
+<span class="doccomment">///    Accepted values: Snake case versions of [`ImageFormat`].</span>
+<span class="doccomment">/// - `sampled` — Whether it is known that the image will be used with a sampler.</span>
+<span class="doccomment">///    Accepted values: `true` or `false`. Default: `unknown`.</span>
+<span class="doccomment">/// - `multisampled` — Whether the image contains multisampled content.</span>
+<span class="doccomment">///    Accepted values: `true` or `false`. Default: `false`.</span>
+<span class="doccomment">/// - `arrayed` — Whether the image contains arrayed content.</span>
+<span class="doccomment">///    Accepted values: `true` or `false`. Default: `false`.</span>
 <span class="doccomment">/// - `depth` — Whether it is known that the image is a depth image.</span>
 <span class="doccomment">///    Accepted values: `true` or `false`. Default: `unknown`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`ImageFormat`]: spirv_types::image_params::ImageFormat</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Keep in mind that `sampled` here is a different concept than the `SampledImage` type:</span>
+<span class="doccomment">/// `sampled=true` means that this image requires a sampler to be able to access, while the</span>
+<span class="doccomment">/// `SampledImage` type bundles that sampler together with the image into a single type (e.g.</span>
+<span class="doccomment">/// `sampler2D` in GLSL, vs. `texture2D`).</span>
 <span class="attribute">#[<span class="ident">proc_macro</span>]</span>
 <span class="comment">// The `Image` is supposed to be used in the type position, which</span>
 <span class="comment">// uses `PascalCase`.</span>
@@ -656,6 +702,7 @@
         <span class="ident">path</span>: <span class="ident">syn::Path::from</span>(<span class="ident">ident</span>),
     })
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="spirv_std_macros" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>
+    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</body></html>

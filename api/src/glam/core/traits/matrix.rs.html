@@ -1,7 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/glam-0.15.2/src/core/traits/matrix.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matrix.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings"></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../glam/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
-                <a id="settings-menu" href="../../../../settings.html"><img src="../../../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;Users&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;glam-0.19.0&#x2F;src&#x2F;core&#x2F;traits&#x2F;matrix.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matrix.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../glam/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -962,11 +959,7 @@
 <span id="959">959</span>
 <span id="960">960</span>
 <span id="961">961</span>
-<span id="962">962</span>
-<span id="963">963</span>
-<span id="964">964</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::core</span>::{
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::core</span>::{
     <span class="ident">storage</span>::{<span class="ident">XY</span>, <span class="ident">XYZ</span>, <span class="ident">XYZW</span>},
     <span class="ident">traits</span>::{
         <span class="ident">quaternion::Quaternion</span>,
@@ -987,7 +980,7 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Matrix2x2</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">NumEx</span>, <span class="ident">V2</span>: <span class="ident">Vector2</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>: <span class="ident">Matrix</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">m00</span>: <span class="ident">T</span>, <span class="ident">m01</span>: <span class="ident">T</span>, <span class="ident">m10</span>: <span class="ident">T</span>, <span class="ident">m11</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(<span class="ident">V2::new</span>(<span class="ident">m00</span>, <span class="ident">m01</span>), <span class="ident">V2::new</span>(<span class="ident">m10</span>, <span class="ident">m11</span>))
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(<span class="ident">V2::new</span>(<span class="ident">m00</span>, <span class="ident">m01</span>), <span class="ident">V2::new</span>(<span class="ident">m10</span>, <span class="ident">m11</span>))
     }
 
     <span class="kw">fn</span> <span class="ident">from_cols</span>(<span class="ident">x_axis</span>: <span class="ident">V2</span>, <span class="ident">y_axis</span>: <span class="ident">V2</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
@@ -997,7 +990,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_array</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">m</span>[<span class="number">0</span>], <span class="ident">m</span>[<span class="number">1</span>], <span class="ident">m</span>[<span class="number">2</span>], <span class="ident">m</span>[<span class="number">3</span>])
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">m</span>[<span class="number">0</span>], <span class="ident">m</span>[<span class="number">1</span>], <span class="ident">m</span>[<span class="number">2</span>], <span class="ident">m</span>[<span class="number">3</span>])
     }
 
     <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
@@ -1011,7 +1004,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_array_2d</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[[<span class="ident">T</span>; <span class="number">2</span>]; <span class="number">2</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(<span class="ident">V2::from_array</span>(<span class="ident">m</span>[<span class="number">0</span>]), <span class="ident">V2::from_array</span>(<span class="ident">m</span>[<span class="number">1</span>]))
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(<span class="ident">V2::from_array</span>(<span class="ident">m</span>[<span class="number">0</span>]), <span class="ident">V2::from_array</span>(<span class="ident">m</span>[<span class="number">1</span>]))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
@@ -1021,7 +1014,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_slice</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">m</span>[<span class="number">0</span>], <span class="ident">m</span>[<span class="number">1</span>], <span class="ident">m</span>[<span class="number">2</span>], <span class="ident">m</span>[<span class="number">3</span>])
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">m</span>[<span class="number">0</span>], <span class="ident">m</span>[<span class="number">1</span>], <span class="ident">m</span>[<span class="number">2</span>], <span class="ident">m</span>[<span class="number">3</span>])
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
@@ -1037,7 +1030,7 @@
     <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_diagonal</span>(<span class="ident">diagonal</span>: <span class="ident">XY</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::new</span>(
+        <span class="ident"><span class="self">Self</span>::new</span>(
             <span class="ident">diagonal</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>,
             <span class="ident">T::ZERO</span>, <span class="ident">diagonal</span>.<span class="ident">y</span>)
     }
@@ -1053,7 +1046,7 @@
     <span class="kw">fn</span> <span class="ident">transpose</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">x_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_axis</span>();
         <span class="kw">let</span> <span class="ident">y_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_axis</span>();
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">x_axis</span>.<span class="ident">x</span>(), <span class="ident">y_axis</span>.<span class="ident">x</span>(), <span class="ident">x_axis</span>.<span class="ident">y</span>(), <span class="ident">y_axis</span>.<span class="ident">y</span>())
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">x_axis</span>.<span class="ident">x</span>(), <span class="ident">y_axis</span>.<span class="ident">x</span>(), <span class="ident">x_axis</span>.<span class="ident">y</span>(), <span class="ident">y_axis</span>.<span class="ident">y</span>())
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1069,7 +1062,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">mul_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
         )
@@ -1077,7 +1070,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
         )
@@ -1085,7 +1078,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">add_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
         )
@@ -1093,7 +1086,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">sub_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
         )
@@ -1115,13 +1108,13 @@
     <span class="kw">fn</span> <span class="ident">from_scale_angle</span>(<span class="ident">scale</span>: <span class="ident">V2</span>, <span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
         <span class="kw">let</span> (<span class="ident">scale_x</span>, <span class="ident">scale_y</span>) <span class="op">=</span> <span class="ident">scale</span>.<span class="ident">into_tuple</span>();
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">cos</span> <span class="op">*</span> <span class="ident">scale_x</span>, <span class="ident">sin</span> <span class="op">*</span> <span class="ident">scale_x</span>, <span class="op">-</span><span class="ident">sin</span> <span class="op">*</span> <span class="ident">scale_y</span>, <span class="ident">cos</span> <span class="op">*</span> <span class="ident">scale_y</span>)
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">cos</span> <span class="op">*</span> <span class="ident">scale_x</span>, <span class="ident">sin</span> <span class="op">*</span> <span class="ident">scale_x</span>, <span class="op">-</span><span class="ident">sin</span> <span class="op">*</span> <span class="ident">scale_y</span>, <span class="ident">cos</span> <span class="op">*</span> <span class="ident">scale_y</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_angle</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::new</span>(<span class="ident">cos</span>, <span class="ident">sin</span>, <span class="op">-</span><span class="ident">sin</span>, <span class="ident">cos</span>)
+        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">cos</span>, <span class="ident">sin</span>, <span class="op">-</span><span class="ident">sin</span>, <span class="ident">cos</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1133,7 +1126,7 @@
         };
         <span class="kw">let</span> <span class="ident">x_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_axis</span>();
         <span class="kw">let</span> <span class="ident">y_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_axis</span>();
-        <span class="self">Self</span><span class="ident">::new</span>(
+        <span class="ident"><span class="self">Self</span>::new</span>(
             <span class="ident">y_axis</span>.<span class="ident">y</span>() <span class="op">*</span> <span class="ident">inv_det</span>,
             <span class="ident">x_axis</span>.<span class="ident">y</span>() <span class="op">*</span> <span class="op">-</span><span class="ident">inv_det</span>,
             <span class="ident">y_axis</span>.<span class="ident">x</span>() <span class="op">*</span> <span class="op">-</span><span class="ident">inv_det</span>,
@@ -1152,7 +1145,7 @@
     <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_array</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">9</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">m</span>[<span class="number">0</span>], <span class="ident">m</span>[<span class="number">1</span>], <span class="ident">m</span>[<span class="number">2</span>]),
             <span class="ident">V3::new</span>(<span class="ident">m</span>[<span class="number">3</span>], <span class="ident">m</span>[<span class="number">4</span>], <span class="ident">m</span>[<span class="number">5</span>]),
             <span class="ident">V3::new</span>(<span class="ident">m</span>[<span class="number">6</span>], <span class="ident">m</span>[<span class="number">7</span>], <span class="ident">m</span>[<span class="number">8</span>]))
@@ -1173,7 +1166,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_array_2d</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[[<span class="ident">T</span>; <span class="number">3</span>]; <span class="number">3</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::from_array</span>(<span class="ident">m</span>[<span class="number">0</span>]),
             <span class="ident">V3::from_array</span>(<span class="ident">m</span>[<span class="number">1</span>]),
             <span class="ident">V3::from_array</span>(<span class="ident">m</span>[<span class="number">2</span>]),
@@ -1191,7 +1184,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_slice</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">m</span>[<span class="number">0</span>], <span class="ident">m</span>[<span class="number">1</span>], <span class="ident">m</span>[<span class="number">2</span>]),
             <span class="ident">V3::new</span>(<span class="ident">m</span>[<span class="number">3</span>], <span class="ident">m</span>[<span class="number">4</span>], <span class="ident">m</span>[<span class="number">5</span>]),
             <span class="ident">V3::new</span>(<span class="ident">m</span>[<span class="number">6</span>], <span class="ident">m</span>[<span class="number">7</span>], <span class="ident">m</span>[<span class="number">8</span>]),
@@ -1217,7 +1210,7 @@
     <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_diagonal</span>(<span class="ident">diagonal</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">diagonal</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">diagonal</span>.<span class="ident">y</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>, <span class="ident">diagonal</span>.<span class="ident">z</span>),
@@ -1228,7 +1221,7 @@
     <span class="kw">fn</span> <span class="ident">from_scale</span>(<span class="ident">scale</span>: <span class="ident">XY</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Do not panic as long as any component is non-zero</span>
         <span class="macro">glam_assert!</span>(<span class="ident">scale</span>.<span class="ident">cmpne</span>(<span class="ident">XY</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::ZERO</span>).<span class="ident">any</span>());
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">scale</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">scale</span>.<span class="ident">y</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::Z</span>,
@@ -1237,7 +1230,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_translation</span>(<span class="ident">translation</span>: <span class="ident">XY</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(<span class="ident">V3::X</span>, <span class="ident">V3::Y</span>, <span class="ident">V3::new</span>(<span class="ident">translation</span>.<span class="ident">x</span>, <span class="ident">translation</span>.<span class="ident">y</span>, <span class="ident">T::ONE</span>))
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(<span class="ident">V3::X</span>, <span class="ident">V3::Y</span>, <span class="ident">V3::new</span>(<span class="ident">translation</span>.<span class="ident">x</span>, <span class="ident">translation</span>.<span class="ident">y</span>, <span class="ident">T::ONE</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1250,7 +1243,7 @@
         <span class="kw">let</span> <span class="ident">x_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_axis</span>();
         <span class="kw">let</span> <span class="ident">y_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_axis</span>();
         <span class="kw">let</span> <span class="ident">z_axis</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">z_axis</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">x_axis</span>.<span class="ident">x</span>(), <span class="ident">y_axis</span>.<span class="ident">x</span>(), <span class="ident">z_axis</span>.<span class="ident">x</span>()),
             <span class="ident">V3::new</span>(<span class="ident">x_axis</span>.<span class="ident">y</span>(), <span class="ident">y_axis</span>.<span class="ident">y</span>(), <span class="ident">z_axis</span>.<span class="ident">y</span>()),
             <span class="ident">V3::new</span>(<span class="ident">x_axis</span>.<span class="ident">z</span>(), <span class="ident">y_axis</span>.<span class="ident">z</span>(), <span class="ident">z_axis</span>.<span class="ident">z</span>()),
@@ -1267,7 +1260,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">mul_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
             <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">z_axis</span>()),
@@ -1276,7 +1269,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
             <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
@@ -1285,7 +1278,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">add_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
             <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">z_axis</span>()),
@@ -1294,7 +1287,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">sub_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
             <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">z_axis</span>()),
@@ -1316,7 +1309,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_angle</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">cos</span>, <span class="ident">sin</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="op">-</span><span class="ident">sin</span>, <span class="ident">cos</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::Z</span>,
@@ -1325,7 +1318,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_scale_angle_translation</span>(<span class="ident">scale</span>: <span class="ident">XY</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">angle</span>: <span class="ident">T</span>, <span class="ident">translation</span>: <span class="ident">XY</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sin</span>, <span class="ident">cos</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">cos</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="ident">x</span>, <span class="ident">sin</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="op">-</span><span class="ident">sin</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="ident">y</span>, <span class="ident">cos</span> <span class="op">*</span> <span class="ident">scale</span>.<span class="ident">y</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="ident">translation</span>.<span class="ident">x</span>, <span class="ident">translation</span>.<span class="ident">y</span>, <span class="ident">T::ONE</span>),
@@ -1343,7 +1336,7 @@
         <span class="kw">let</span> <span class="ident">xyomc</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">omc</span>;
         <span class="kw">let</span> <span class="ident">xzomc</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">z</span> <span class="op">*</span> <span class="ident">omc</span>;
         <span class="kw">let</span> <span class="ident">yzomc</span> <span class="op">=</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">z</span> <span class="op">*</span> <span class="ident">omc</span>;
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">x2</span> <span class="op">*</span> <span class="ident">omc</span> <span class="op">+</span> <span class="ident">cos</span>, <span class="ident">xyomc</span> <span class="op">+</span> <span class="ident">zsin</span>, <span class="ident">xzomc</span> <span class="op">-</span> <span class="ident">ysin</span>),
             <span class="ident">V3::new</span>(<span class="ident">xyomc</span> <span class="op">-</span> <span class="ident">zsin</span>, <span class="ident">y2</span> <span class="op">*</span> <span class="ident">omc</span> <span class="op">+</span> <span class="ident">cos</span>, <span class="ident">yzomc</span> <span class="op">+</span> <span class="ident">xsin</span>),
             <span class="ident">V3::new</span>(<span class="ident">xzomc</span> <span class="op">+</span> <span class="ident">ysin</span>, <span class="ident">yzomc</span> <span class="op">-</span> <span class="ident">xsin</span>, <span class="ident">z2</span> <span class="op">*</span> <span class="ident">omc</span> <span class="op">+</span> <span class="ident">cos</span>),
@@ -1366,7 +1359,7 @@
         <span class="kw">let</span> <span class="ident">wy</span> <span class="op">=</span> <span class="ident">rotation</span>.<span class="ident">w</span> <span class="op">*</span> <span class="ident">y2</span>;
         <span class="kw">let</span> <span class="ident">wz</span> <span class="op">=</span> <span class="ident">rotation</span>.<span class="ident">w</span> <span class="op">*</span> <span class="ident">z2</span>;
 
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">T::ONE</span> <span class="op">-</span> (<span class="ident">yy</span> <span class="op">+</span> <span class="ident">zz</span>), <span class="ident">xy</span> <span class="op">+</span> <span class="ident">wz</span>, <span class="ident">xz</span> <span class="op">-</span> <span class="ident">wy</span>),
             <span class="ident">V3::new</span>(<span class="ident">xy</span> <span class="op">-</span> <span class="ident">wz</span>, <span class="ident">T::ONE</span> <span class="op">-</span> (<span class="ident">xx</span> <span class="op">+</span> <span class="ident">zz</span>), <span class="ident">yz</span> <span class="op">+</span> <span class="ident">wx</span>),
             <span class="ident">V3::new</span>(<span class="ident">xz</span> <span class="op">+</span> <span class="ident">wy</span>, <span class="ident">yz</span> <span class="op">-</span> <span class="ident">wx</span>, <span class="ident">T::ONE</span> <span class="op">-</span> (<span class="ident">xx</span> <span class="op">+</span> <span class="ident">yy</span>)),
@@ -1376,7 +1369,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_rotation_x</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sina</span>, <span class="ident">cosa</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::X</span>,
             <span class="ident">V3::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">cosa</span>, <span class="ident">sina</span>),
             <span class="ident">V3::new</span>(<span class="ident">T::ZERO</span>, <span class="op">-</span><span class="ident">sina</span>, <span class="ident">cosa</span>),
@@ -1386,7 +1379,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_rotation_y</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sina</span>, <span class="ident">cosa</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">cosa</span>, <span class="ident">T::ZERO</span>, <span class="op">-</span><span class="ident">sina</span>),
             <span class="ident">V3::Y</span>,
             <span class="ident">V3::new</span>(<span class="ident">sina</span>, <span class="ident">T::ZERO</span>, <span class="ident">cosa</span>),
@@ -1396,7 +1389,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_rotation_z</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sina</span>, <span class="ident">cosa</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V3::new</span>(<span class="ident">cosa</span>, <span class="ident">sina</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::new</span>(<span class="op">-</span><span class="ident">sina</span>, <span class="ident">cosa</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V3::Z</span>,
@@ -1421,7 +1414,7 @@
         <span class="macro">glam_assert!</span>(<span class="ident">det</span>.<span class="ident">cmpne</span>(<span class="ident">V3::ZERO</span>).<span class="ident">all</span>());
         <span class="kw">let</span> <span class="ident">inv_det</span> <span class="op">=</span> <span class="ident">det</span>.<span class="ident">recip</span>();
         <span class="comment">// TODO: Work out if it&#39;s possible to get rid of the transpose</span>
-        <span class="self">Self</span><span class="ident">::from_cols</span>(<span class="ident">tmp0</span>.<span class="ident">mul</span>(<span class="ident">inv_det</span>), <span class="ident">tmp1</span>.<span class="ident">mul</span>(<span class="ident">inv_det</span>), <span class="ident">tmp2</span>.<span class="ident">mul</span>(<span class="ident">inv_det</span>)).<span class="ident">transpose</span>()
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(<span class="ident">tmp0</span>.<span class="ident">mul</span>(<span class="ident">inv_det</span>), <span class="ident">tmp1</span>.<span class="ident">mul</span>(<span class="ident">inv_det</span>), <span class="ident">tmp2</span>.<span class="ident">mul</span>(<span class="ident">inv_det</span>)).<span class="ident">transpose</span>()
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1446,7 +1439,7 @@
     <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_array</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>; <span class="number">16</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>( <span class="ident">m</span>[<span class="number">0</span>],  <span class="ident">m</span>[<span class="number">1</span>],  <span class="ident">m</span>[<span class="number">2</span>],  <span class="ident">m</span>[<span class="number">3</span>]),
             <span class="ident">V4::new</span>( <span class="ident">m</span>[<span class="number">4</span>],  <span class="ident">m</span>[<span class="number">5</span>],  <span class="ident">m</span>[<span class="number">6</span>],  <span class="ident">m</span>[<span class="number">7</span>]),
             <span class="ident">V4::new</span>( <span class="ident">m</span>[<span class="number">8</span>],  <span class="ident">m</span>[<span class="number">9</span>], <span class="ident">m</span>[<span class="number">10</span>], <span class="ident">m</span>[<span class="number">11</span>]),
@@ -1470,7 +1463,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_array_2d</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[[<span class="ident">T</span>; <span class="number">4</span>]; <span class="number">4</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">Vector4::from_array</span>(<span class="ident">m</span>[<span class="number">0</span>]),
             <span class="ident">Vector4::from_array</span>(<span class="ident">m</span>[<span class="number">1</span>]),
             <span class="ident">Vector4::from_array</span>(<span class="ident">m</span>[<span class="number">2</span>]),
@@ -1491,7 +1484,7 @@
     <span class="attribute">#[<span class="ident">rustfmt::skip</span>]</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_cols_slice</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>( <span class="ident">m</span>[<span class="number">0</span>],  <span class="ident">m</span>[<span class="number">1</span>],  <span class="ident">m</span>[<span class="number">2</span>],  <span class="ident">m</span>[<span class="number">3</span>]),
             <span class="ident">V4::new</span>( <span class="ident">m</span>[<span class="number">4</span>],  <span class="ident">m</span>[<span class="number">5</span>],  <span class="ident">m</span>[<span class="number">6</span>],  <span class="ident">m</span>[<span class="number">7</span>]),
             <span class="ident">V4::new</span>( <span class="ident">m</span>[<span class="number">8</span>],  <span class="ident">m</span>[<span class="number">9</span>], <span class="ident">m</span>[<span class="number">10</span>], <span class="ident">m</span>[<span class="number">11</span>]),
@@ -1527,7 +1520,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_diagonal</span>(<span class="ident">diagonal</span>: <span class="ident">XYZW</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(<span class="ident">diagonal</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">diagonal</span>.<span class="ident">y</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>, <span class="ident">diagonal</span>.<span class="ident">z</span>, <span class="ident">T::ZERO</span>),
@@ -1539,7 +1532,7 @@
     <span class="kw">fn</span> <span class="ident">from_scale</span>(<span class="ident">scale</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Do not panic as long as any component is non-zero</span>
         <span class="macro">glam_assert!</span>(<span class="ident">scale</span>.<span class="ident">cmpne</span>(<span class="ident">XYZ</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="ident">::ZERO</span>).<span class="ident">any</span>());
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(<span class="ident">scale</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">scale</span>.<span class="ident">y</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>, <span class="ident">scale</span>.<span class="ident">z</span>, <span class="ident">T::ZERO</span>),
@@ -1549,7 +1542,7 @@
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
     <span class="kw">fn</span> <span class="ident">from_translation</span>(<span class="ident">translation</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::X</span>,
             <span class="ident">V4::Y</span>,
             <span class="ident">V4::Z</span>,
@@ -1584,7 +1577,7 @@
         <span class="kw">let</span> (<span class="ident">m20</span>, <span class="ident">m21</span>, <span class="ident">m22</span>, <span class="ident">m23</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">into_tuple</span>();
         <span class="kw">let</span> (<span class="ident">m30</span>, <span class="ident">m31</span>, <span class="ident">m32</span>, <span class="ident">m33</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">w_axis</span>().<span class="ident">into_tuple</span>();
 
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(<span class="ident">m00</span>, <span class="ident">m10</span>, <span class="ident">m20</span>, <span class="ident">m30</span>),
             <span class="ident">V4::new</span>(<span class="ident">m01</span>, <span class="ident">m11</span>, <span class="ident">m21</span>, <span class="ident">m31</span>),
             <span class="ident">V4::new</span>(<span class="ident">m02</span>, <span class="ident">m12</span>, <span class="ident">m22</span>, <span class="ident">m32</span>),
@@ -1593,7 +1586,7 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">mul_vector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">V4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">V4</span> {
+    <span class="kw">fn</span> <span class="ident">mul_vector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">V4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">V4</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">mul</span>(<span class="ident">other</span>.<span class="ident">splat_x</span>());
         <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">mul_add</span>(<span class="ident">other</span>.<span class="ident">splat_y</span>(), <span class="ident">res</span>);
         <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">mul_add</span>(<span class="ident">other</span>.<span class="ident">splat_z</span>(), <span class="ident">res</span>);
@@ -1603,17 +1596,17 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">mul_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
-            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="ident">other</span>.<span class="ident">x_axis</span>()),
-            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="ident">other</span>.<span class="ident">y_axis</span>()),
-            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="ident">other</span>.<span class="ident">z_axis</span>()),
-            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="ident">other</span>.<span class="ident">w_axis</span>()),
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
+            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
+            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
+            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">z_axis</span>()),
+            <span class="self">self</span>.<span class="ident">mul_vector</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">w_axis</span>()),
         )
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
             <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">mul_scalar</span>(<span class="ident">other</span>),
@@ -1624,7 +1617,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">add_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// TODO: Make Vector4::add take a ref?</span>
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
             <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">z_axis</span>()),
@@ -1635,7 +1628,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">sub_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// TODO: Make Vector4::sub take a ref?</span>
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">x_axis</span>()),
             <span class="self">self</span>.<span class="ident">y_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">y_axis</span>()),
             <span class="self">self</span>.<span class="ident">z_axis</span>().<span class="ident">sub</span>(<span class="kw-2">*</span><span class="ident">other</span>.<span class="ident">z_axis</span>()),
@@ -1686,9 +1679,8 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_quaternion</span>(<span class="ident">rotation</span>: <span class="ident">V4</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">glam_assert!</span>(<span class="ident">rotation</span>.<span class="ident">is_normalized</span>());
-        <span class="kw">let</span> (<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>) <span class="op">=</span> <span class="self">Self</span><span class="ident">::quaternion_to_axes</span>(<span class="ident">rotation</span>);
-        <span class="self">Self</span><span class="ident">::from_cols</span>(<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>, <span class="ident">V4::W</span>)
+        <span class="kw">let</span> (<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>) <span class="op">=</span> <span class="ident"><span class="self">Self</span>::quaternion_to_axes</span>(<span class="ident">rotation</span>);
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>, <span class="ident">V4::W</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">to_scale_quaternion_translation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">V4</span>, <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) {
@@ -1718,9 +1710,8 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_scale_quaternion_translation</span>(<span class="ident">scale</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">rotation</span>: <span class="ident">V4</span>, <span class="ident">translation</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">glam_assert!</span>(<span class="ident">rotation</span>.<span class="ident">is_normalized</span>());
-        <span class="kw">let</span> (<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>) <span class="op">=</span> <span class="self">Self</span><span class="ident">::quaternion_to_axes</span>(<span class="ident">rotation</span>);
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="kw">let</span> (<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>) <span class="op">=</span> <span class="ident"><span class="self">Self</span>::quaternion_to_axes</span>(<span class="ident">rotation</span>);
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">x_axis</span>.<span class="ident">mul_scalar</span>(<span class="ident">scale</span>.<span class="ident">x</span>),
             <span class="ident">y_axis</span>.<span class="ident">mul_scalar</span>(<span class="ident">scale</span>.<span class="ident">y</span>),
             <span class="ident">z_axis</span>.<span class="ident">mul_scalar</span>(<span class="ident">scale</span>.<span class="ident">z</span>),
@@ -1730,9 +1721,8 @@
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_quaternion_translation</span>(<span class="ident">rotation</span>: <span class="ident">V4</span>, <span class="ident">translation</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">glam_assert!</span>(<span class="ident">rotation</span>.<span class="ident">is_normalized</span>());
-        <span class="kw">let</span> (<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>) <span class="op">=</span> <span class="self">Self</span><span class="ident">::quaternion_to_axes</span>(<span class="ident">rotation</span>);
-        <span class="self">Self</span><span class="ident">::from_cols</span>(<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>, <span class="ident">V4::from_xyz</span>(<span class="ident">translation</span>, <span class="ident">T::ONE</span>))
+        <span class="kw">let</span> (<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>) <span class="op">=</span> <span class="ident"><span class="self">Self</span>::quaternion_to_axes</span>(<span class="ident">rotation</span>);
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(<span class="ident">x_axis</span>, <span class="ident">y_axis</span>, <span class="ident">z_axis</span>, <span class="ident">V4::from_xyz</span>(<span class="ident">translation</span>, <span class="ident">T::ONE</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1745,7 +1735,7 @@
         <span class="kw">let</span> <span class="ident">xyomc</span> <span class="op">=</span> <span class="ident">axis</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">axis</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">omc</span>;
         <span class="kw">let</span> <span class="ident">xzomc</span> <span class="op">=</span> <span class="ident">axis</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">axis</span>.<span class="ident">z</span> <span class="op">*</span> <span class="ident">omc</span>;
         <span class="kw">let</span> <span class="ident">yzomc</span> <span class="op">=</span> <span class="ident">axis</span>.<span class="ident">y</span> <span class="op">*</span> <span class="ident">axis</span>.<span class="ident">z</span> <span class="op">*</span> <span class="ident">omc</span>;
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(
                 <span class="ident">axis_sq</span>.<span class="ident">x</span> <span class="op">*</span> <span class="ident">omc</span> <span class="op">+</span> <span class="ident">cos</span>,
                 <span class="ident">xyomc</span> <span class="op">+</span> <span class="ident">axis_sin</span>.<span class="ident">z</span>,
@@ -1771,7 +1761,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_rotation_x</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sina</span>, <span class="ident">cosa</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::X</span>,
             <span class="ident">V4::new</span>(<span class="ident">T::ZERO</span>, <span class="ident">cosa</span>, <span class="ident">sina</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">T::ZERO</span>, <span class="op">-</span><span class="ident">sina</span>, <span class="ident">cosa</span>, <span class="ident">T::ZERO</span>),
@@ -1782,7 +1772,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_rotation_y</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sina</span>, <span class="ident">cosa</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(<span class="ident">cosa</span>, <span class="ident">T::ZERO</span>, <span class="op">-</span><span class="ident">sina</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::Y</span>,
             <span class="ident">V4::new</span>(<span class="ident">sina</span>, <span class="ident">T::ZERO</span>, <span class="ident">cosa</span>, <span class="ident">T::ZERO</span>),
@@ -1793,7 +1783,7 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from_rotation_z</span>(<span class="ident">angle</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">sina</span>, <span class="ident">cosa</span>) <span class="op">=</span> <span class="ident">angle</span>.<span class="ident">sin_cos</span>();
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(<span class="ident">cosa</span>, <span class="ident">sina</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="op">-</span><span class="ident">sina</span>, <span class="ident">cosa</span>, <span class="ident">T::ZERO</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::Z</span>,
@@ -1806,7 +1796,7 @@
         <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">dir</span>.<span class="ident">normalize</span>();
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">up</span>.<span class="ident">cross</span>(<span class="ident">f</span>).<span class="ident">normalize</span>();
         <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">cross</span>(<span class="ident">s</span>);
-        <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">V4::new</span>(<span class="ident">s</span>.<span class="ident">x</span>, <span class="ident">u</span>.<span class="ident">x</span>, <span class="ident">f</span>.<span class="ident">x</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">s</span>.<span class="ident">y</span>, <span class="ident">u</span>.<span class="ident">y</span>, <span class="ident">f</span>.<span class="ident">y</span>, <span class="ident">T::ZERO</span>),
             <span class="ident">V4::new</span>(<span class="ident">s</span>.<span class="ident">z</span>, <span class="ident">u</span>.<span class="ident">z</span>, <span class="ident">f</span>.<span class="ident">z</span>, <span class="ident">T::ZERO</span>),
@@ -1817,13 +1807,13 @@
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">look_at_lh</span>(<span class="ident">eye</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">center</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">up</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="macro">glam_assert!</span>(<span class="ident">up</span>.<span class="ident">is_normalized</span>());
-        <span class="self">Self</span><span class="ident">::look_to_lh</span>(<span class="ident">eye</span>, <span class="ident">center</span>.<span class="ident">sub</span>(<span class="ident">eye</span>), <span class="ident">up</span>)
+        <span class="ident"><span class="self">Self</span>::look_to_lh</span>(<span class="ident">eye</span>, <span class="ident">center</span>.<span class="ident">sub</span>(<span class="ident">eye</span>), <span class="ident">up</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">look_at_rh</span>(<span class="ident">eye</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">center</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">up</span>: <span class="ident">XYZ</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="macro">glam_assert!</span>(<span class="ident">up</span>.<span class="ident">is_normalized</span>());
-        <span class="self">Self</span><span class="ident">::look_to_lh</span>(<span class="ident">eye</span>, <span class="ident">eye</span>.<span class="ident">sub</span>(<span class="ident">center</span>), <span class="ident">up</span>)
+        <span class="ident"><span class="self">Self</span>::look_to_lh</span>(<span class="ident">eye</span>, <span class="ident">eye</span>.<span class="ident">sub</span>(<span class="ident">center</span>), <span class="ident">up</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -1853,9 +1843,9 @@
         <span class="ident">res</span>.<span class="ident">into_xyz</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">transform_float4_as_point3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span><span class="ident">::SIMDVector3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::SIMDVector3</span>;
-    <span class="kw">fn</span> <span class="ident">transform_float4_as_vector3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span><span class="ident">::SIMDVector3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::SIMDVector3</span>;
-    <span class="kw">fn</span> <span class="ident">project_float4_as_point3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span><span class="ident">::SIMDVector3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::SIMDVector3</span>;
+    <span class="kw">fn</span> <span class="ident">transform_float4_as_point3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident"><span class="self">Self</span>::SIMDVector3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::SIMDVector3</span>;
+    <span class="kw">fn</span> <span class="ident">transform_float4_as_vector3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident"><span class="self">Self</span>::SIMDVector3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::SIMDVector3</span>;
+    <span class="kw">fn</span> <span class="ident">project_float4_as_point3</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident"><span class="self">Self</span>::SIMDVector3</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::SIMDVector3</span>;
 
     <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">m00</span>, <span class="ident">m01</span>, <span class="ident">m02</span>, <span class="ident">m03</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">x_axis</span>().<span class="ident">into_tuple</span>();
@@ -1907,7 +1897,7 @@
         <span class="kw">let</span> <span class="ident">sign_a</span> <span class="op">=</span> <span class="ident">Vector4::new</span>(<span class="ident">T::ONE</span>, <span class="op">-</span><span class="ident">T::ONE</span>, <span class="ident">T::ONE</span>, <span class="op">-</span><span class="ident">T::ONE</span>);
         <span class="kw">let</span> <span class="ident">sign_b</span> <span class="op">=</span> <span class="ident">Vector4::new</span>(<span class="op">-</span><span class="ident">T::ONE</span>, <span class="ident">T::ONE</span>, <span class="op">-</span><span class="ident">T::ONE</span>, <span class="ident">T::ONE</span>);
 
-        <span class="kw">let</span> <span class="ident">inverse</span> <span class="op">=</span> <span class="self">Self</span><span class="ident">::from_cols</span>(
+        <span class="kw">let</span> <span class="ident">inverse</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::from_cols</span>(
             <span class="ident">inv0</span>.<span class="ident">mul</span>(<span class="ident">sign_a</span>),
             <span class="ident">inv1</span>.<span class="ident">mul</span>(<span class="ident">sign_b</span>),
             <span class="ident">inv2</span>.<span class="ident">mul</span>(<span class="ident">sign_a</span>),
@@ -1930,6 +1920,7 @@
         <span class="ident">inverse</span>.<span class="ident">mul_scalar</span>(<span class="ident">rcp_det</span>)
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="glam" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
-    <script src="../../../../main.js"></script><script src="../../../../source-script.js"></script><script src="../../../../source-files.js"></script></body></html>
+    <script src="../../../../main.js"></script><script src="../../../../source-script.js"></script><script src="../../../../source-files.js"></script>
+</body></html>
