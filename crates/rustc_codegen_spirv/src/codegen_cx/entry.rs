@@ -329,20 +329,18 @@ impl<'tcx> CodegenCx<'tcx> {
             false
         };
         let non_readable = if let Some(non_readable) = attrs.non_readable {
-            match storage_class {
-                StorageClass::Image | StorageClass::StorageBuffer => true,
-                StorageClass::UniformConstant
-                    if matches!(self.lookup_type(value_spirv_type), SpirvType::Image { .. }) =>
-                {
-                    true
-                }
-                _ => {
-                    self.tcx.sess.span_err(
-                        non_readable.span,
-                        "#[spirv(non_readable)] is only valid on Image and StorageBuffer variables",
-                    );
-                    false
-                }
+            // The variable is a storage image.
+            if matches!(
+                self.lookup_type(value_spirv_type),
+                SpirvType::Image { sampled: 2, .. }
+            ) {
+                true
+            } else {
+                self.tcx.sess.span_err(
+                    non_readable.span,
+                    "#[spirv(non_readable)] is only valid on Image and StorageBuffer variables",
+                );
+                false
             }
         } else {
             false
