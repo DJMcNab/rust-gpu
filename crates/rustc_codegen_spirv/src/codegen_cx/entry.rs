@@ -331,6 +331,11 @@ impl<'tcx> CodegenCx<'tcx> {
         let non_readable = if let Some(non_readable) = attrs.non_readable {
             match storage_class {
                 StorageClass::Image | StorageClass::StorageBuffer => true,
+                StorageClass::UniformConstant
+                    if matches!(self.lookup_type(value_spirv_type), SpirvType::Image { .. }) =>
+                {
+                    true
+                }
                 _ => {
                     self.tcx.sess.span_err(
                         non_readable.span,
@@ -349,7 +354,7 @@ impl<'tcx> CodegenCx<'tcx> {
                 let var_spirv_type = SpirvType::InterfaceBlock {
                     inner_type: value_spirv_type,
                     non_readable,
-                    non_writable
+                    non_writable,
                 }
                 .def(hir_param.span, self);
                 var_ptr_spirv_type = self.type_ptr_to(var_spirv_type);
@@ -387,6 +392,14 @@ impl<'tcx> CodegenCx<'tcx> {
                 (value_ptr, value_len)
             }
             StorageClass::UniformConstant => {
+                if non_readable {
+                    self.emit_global()
+                        .decorate(var, Decoration::NonReadable, [])
+                }
+                if non_writable {
+                    self.emit_global()
+                        .decorate(var, Decoration::NonWritable, [])
+                }
                 var_ptr_spirv_type = self.type_ptr_to(value_spirv_type);
 
                 match self.lookup_type(value_spirv_type) {
