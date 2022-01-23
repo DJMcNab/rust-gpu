@@ -344,6 +344,7 @@ impl Symbols {
                 "buffer_store_intrinsic",
                 SpirvAttribute::BufferStoreIntrinsic,
             ),
+            ("workgroup_uniform", SpirvAttribute::WorkgroupUniform),
         ]
         .iter()
         .cloned();

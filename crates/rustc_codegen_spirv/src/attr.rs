@@ -92,6 +92,9 @@ pub enum SpirvAttribute {
     UnrollLoops,
     BufferLoadIntrinsic,
     BufferStoreIntrinsic,
+
+    // fn/struct attributes
+    WorkgroupUniform,
 }
 
 // HACK(eddyb) this is similar to `rustc_span::Spanned` but with `value` as the
@@ -127,6 +130,9 @@ pub struct AggregatedSpirvAttributes {
     pub unroll_loops: Option<Spanned<()>>,
     pub buffer_load_intrinsic: Option<Spanned<()>>,
     pub buffer_store_intrinsic: Option<Spanned<()>>,
+
+    // Struct/function attributes
+    pub workgroup_uniform: Option<Spanned<()>>,
 }
 
 struct MultipleAttrs {
@@ -225,6 +231,12 @@ impl AggregatedSpirvAttributes {
                 (),
                 span,
                 "#[spirv(buffer_store_intrinsic)]",
+            ),
+            WorkgroupUniform => try_insert(
+                &mut self.workgroup_uniform,
+                (),
+                span,
+                "#[spirv(workgroup_uniform)]",
             ),
         }
     }
@@ -362,6 +374,10 @@ impl CheckSpirvAttrVisitor<'_> {
                         _ => Err(Expected("function")),
                     }
                 }
+                SpirvAttribute::WorkgroupUniform => match target {
+                    Target::Fn | Target::Struct => Ok(()),
+                    _ => Err(Expected("function or struct")),
+                },
             };
             match valid_target {
                 Err(Expected(expected_target)) => self.tcx.sess.span_err(
