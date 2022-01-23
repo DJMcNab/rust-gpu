@@ -291,7 +291,11 @@ impl<'tcx> CodegenCx<'tcx> {
         call_args: &mut Vec<SpirvValue>,
         decoration_locations: &mut FxHashMap<StorageClass, u32>,
     ) {
-        let attrs = AggregatedSpirvAttributes::parse(self, self.tcx.hir().attrs(hir_param.hir_id));
+        let attrs = AggregatedSpirvAttributes::parse(
+            &self.tcx,
+            &self.sym,
+            self.tcx.hir().attrs(hir_param.hir_id),
+        );
 
         // Pre-allocate the module-scoped `OpVariable`'s *Result* ID.
         let var = self.emit_global().id();
