@@ -11,6 +11,11 @@
     ),
     register_attr(spirv)
 )]
+// Used for the `Divergent` trait
+#![cfg_attr(
+    feature = "workgroup_uniform",
+    feature(rustc_attrs, auto_traits, negative_impls)
+)]
 // BEGIN - Embark standard lints v0.4
 // do not change or add/remove here, but one can add exceptions after this section
 // for more info see: <https://github.com/EmbarkStudios/rust-ecosystem/issues/59>
@@ -108,6 +113,9 @@ mod sampler;
 pub mod scalar;
 pub(crate) mod sealed;
 pub mod vector;
+
+#[cfg(feature = "workgroup_uniform")]
+pub mod workgroup_uniform;
 
 pub use self::sampler::Sampler;
 pub use crate::macros::Image;

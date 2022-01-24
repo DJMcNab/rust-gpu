@@ -15,4 +15,5 @@ spirv-std-macros = { path = "./macros", version = "0.4.0-alpha.12" }
 glam = { version = ">=0.17, <=0.20", default-features = false, features = ["libm"], optional = true }
 
 [features]
-default = []
+default = ["workgroup_uniform"]
+workgroup_uniform = []
