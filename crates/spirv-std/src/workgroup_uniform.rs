@@ -21,7 +21,8 @@ pub unsafe auto trait Divergent {}
 // ```
 // Unfortunately, since we have to work within the constraints of the type system, we can't
 // make `requires_uniform` function pointers !Divergent directly; we can't even detect such.
-// These are handled by special casing in the handling code
+// These are handled by special casing in the handling code; (we prevent turning function item
+// types for functions annotated with `#[spirv(workgroup_uniform)]` into function pointers)
 
 /// A non-divergent value can be read in any context
 unsafe impl<T> Divergent for &T {}
